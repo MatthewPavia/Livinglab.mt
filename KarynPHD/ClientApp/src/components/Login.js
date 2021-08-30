@@ -13,10 +13,12 @@ import {
     Select,
     Text,
     useColorModeValue,
-    useToast
+    useToast,
+    NumberInput,
+    NumberInputField,
   } from '@chakra-ui/react';
 import ReCAPTCHA from "react-google-recaptcha";
-
+import Cookies from 'universal-cookie';
 
 export class Login extends Component {
 
@@ -73,10 +75,21 @@ export class Login extends Component {
     return false;
   }
 
+  setUserCookies(username, displayName){
+    const cookies = new Cookies();
+
+    const current = new Date();
+    const nextYear = new Date();
+    nextYear.setFullYear(current.getFullYear() + 1);
+
+    cookies.set('username', username, { path: '/', expires:nextYear });
+    cookies.set('displayName', displayName, { path: '/', expires:nextYear });
+  }
+
   submit(){
     this.setState({submitted:true})
-    const toast = useToast()
-
+    const cookies = new Cookies();
+    
     let userDetails = {
       "username" : this.state.username,
       "displayName" : this.state.displayName,
@@ -85,21 +98,27 @@ export class Login extends Component {
     }
 
     if(this.areAllInputsFilled(userDetails) && this.state.captchaVerified){
-      fetch('http://example.com/movies.json')  
+      fetch('user', {
+        method:'POST', 
+        body:JSON.stringify(userDetails),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(data => this.setUserCookies(this.state.username, this.state.displayName))
+      .then(() => this.props.history.push('/fetch-data'))
+      .catch(error => console.log(error))
     }
     else{
-      return(
-        () => this.toast({
-          title: "Account created.",
-          description: "We've created your account for you.",
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-        })
-      )
+     // return(
+       // () => this.toast({
+         // title: "Account created.",
+          //description: "We've created your account for you.",
+          //status: "success",
+          //duration: 9000,
+          //isClosable: true,
+        //})
+      //)
     }
-
-    console.log(userDetails)
   }
 
   render () {
@@ -108,7 +127,7 @@ export class Login extends Component {
             minH={'100vh'}
             align={'center'}
             justify={'center'}
-            bg='eucalyptus.100'
+            bg='rgba(228, 230, 235, 0.3)'
             >
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
               <Stack align={'center'}>
@@ -129,10 +148,10 @@ export class Login extends Component {
                     <Input type="text" onBlur={this.displayNameInput}/>
                   </FormControl>
 
-                  <HStack spacing={6}>
-                    <FormControl id="age" maxWidth="16" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
+                  <HStack spacing={4}>
+                    <FormControl id="age" maxWidth="20" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
                       <FormLabel>Age</FormLabel>
-                      <Input type="number" onBlur={this.ageInput}/>
+                      <NumberInput min={16} max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
                     </FormControl>
                     <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
                       <FormLabel>Locality</FormLabel>
@@ -143,15 +162,15 @@ export class Login extends Component {
                       </Select>
                     </FormControl>
                   </HStack>
-
+                 
                   <ReCAPTCHA
                     sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
                     onChange={this.onValid}
                   />
                   
-
                   <Stack spacing={10}>                    
                     <Button
+                      isDisabled={!this.state.captchaVerified}
                       onClick={this.submit}
                       bg={'auburn.400'}
                       color={'white'}

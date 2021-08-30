@@ -18,7 +18,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "reactstrap": "^8.4.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "ajv": "^6.9.1",
@@ -42,6 +43,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/"
   },
+  "proxy": "https://localhost:44343",
   "browserslist": {
     "production": [
       ">0.2%",

@@ -57,7 +57,7 @@ export class Home extends Component {
                 _hover={{
                   bg: 'auburn.500',
                 }}>
-                Sign In
+                Join Living Lab
               </Button>
               <Button rounded={'full'}>How It Works</Button>
             </Stack>
