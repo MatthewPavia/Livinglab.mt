@@ -19,7 +19,7 @@ export class Home extends Component {
   }
 
   handleLogin(){
-    this.props.history.push('/login')
+    this.props.history.push('/main')
   }
 
   render () {

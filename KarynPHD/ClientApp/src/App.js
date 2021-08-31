@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
+import { Main } from './components/Main';
 import { Login } from './components/Login';
 
 import './custom.css'
@@ -28,12 +28,10 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/fetch-data' component={FetchData} />
-
+        <Route path='/main' render={(props) => (<Main {...props} isAuth={this.isAuth()} />)} />
         <>
           {this.isAuth() ? 
-            <Redirect to='/fetch-data'></Redirect>
+            <Redirect to='/main'></Redirect>
             : <Redirect to='/'></Redirect>
           }
         </>
