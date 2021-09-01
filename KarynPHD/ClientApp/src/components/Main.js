@@ -1,7 +1,7 @@
 import { Flex,  CircularProgress, Box, Text} from '@chakra-ui/react';
 import React, { Component } from 'react';
 import { Login } from './Login';
-
+import NavMenu from './Nav/NavMenu';
 
 export class Main extends Component {
     constructor(props) {
@@ -13,8 +13,9 @@ export class Main extends Component {
 
     render(){
         return(
-            <>      
+            <>  
                 <Box width='100%' height='100%' position='relative'>
+                    <NavMenu></NavMenu>    
                     {!this.props.isAuth ? 
                     <Box position='absolute' width='100%' height='100%' zIndex='10'>
                         <Login></Login>

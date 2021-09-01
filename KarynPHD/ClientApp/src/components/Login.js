@@ -107,7 +107,7 @@ export class Login extends Component {
               minH={'100vh'}
               align={'center'}
               justify={'center'}       
-              bg='rgba(228, 230, 235, 0.2)'
+              bg='rgba(228, 230, 235, 0.9)'
               >
               <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
