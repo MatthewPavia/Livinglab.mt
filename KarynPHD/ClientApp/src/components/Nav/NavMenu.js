@@ -42,7 +42,7 @@ export default function NavMenu() {
 
   return (
     <>
-      <Box bg={useColorModeValue('eucalyptus.300', 'gray.900')} px={4}>
+      <Box bg={'eucalyptus.300'} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -51,20 +51,34 @@ export default function NavMenu() {
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
+
           <HStack spacing={8} alignItems={'center'}>
             <Text color="gray.50" fontSize="xl" >MobilitAzzjoni</Text>
-            
           </HStack>
-          <Box w="30%"><Stepper></Stepper></Box>       
-          <Flex alignItems={'center'}>
 
-          <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
-            <Button variant="solid" mr="-px">En</Button>
-            <Button variant="outline" mr="-px">Mt</Button>
-          </ButtonGroup>
+            <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper></Stepper></Box>       
+            <Flex alignItems={'center'} display={{ base: 'none', md: 'flex' }}>
 
-          </Flex>
+              <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
+                <Button variant="solid" mr="-px">En</Button>
+                <Button variant="outline" mr="-px">Mt</Button>
+              </ButtonGroup>
+
+            </Flex>
         </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={1}>
+              <Stepper></Stepper>
+            </Stack>
+            <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
+              <Button variant="solid" mr="-px">En</Button>
+              <Button variant="outline" mr="-px">Mt</Button>
+            </ButtonGroup>
+          </Box>
+        ) : null}
+
       </Box>
     </>
   );

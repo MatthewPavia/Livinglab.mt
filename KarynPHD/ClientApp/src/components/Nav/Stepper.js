@@ -14,7 +14,7 @@ export default function Stepper() {
   });
 
   return (
-    <Steps activeStep={3} colorScheme='auburn'>
+    <Steps activeStep={3} colorScheme='auburn' responsive={true}>
       {steps.map(({ label }) => (
         <Step label={label} key={label}>
         </Step>

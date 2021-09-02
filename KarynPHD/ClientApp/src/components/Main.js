@@ -2,6 +2,7 @@ import { Flex,  CircularProgress, Box, Text} from '@chakra-ui/react';
 import React, { Component } from 'react';
 import { Login } from './Login';
 import NavMenu from './Nav/NavMenu';
+import Noteboard from './Noteboard/Noteboard';
 
 export class Main extends Component {
     constructor(props) {
@@ -21,8 +22,8 @@ export class Main extends Component {
                         <Login></Login>
                     </Box>
                     : <></>}
-                    <Text position='relative' width='100%' height='100%'>TEST</Text>
                 </Box>
+                <Noteboard></Noteboard>
             </>
         )
     }
