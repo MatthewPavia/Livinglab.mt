@@ -12,6 +12,7 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import { data } from "jquery";
 import { BsHeart, BsFillHeartFill } from 'react-icons/bs';
+import Cookies from 'universal-cookie';
 
 export default class Note extends Component {
 
@@ -22,6 +23,11 @@ export default class Note extends Component {
     };   
     
     this.randomColour = this.randomColour.bind(this);
+    this.likeNote = this.likeNote.bind(this);
+    this.unlikeNote = this.unlikeNote.bind(this);
+    this.updateLikedNoteList = this.updateLikedNoteList.bind(this);
+    this.removeFromLikedNoteList = this.removeFromLikedNoteList.bind(this);
+    this.isNoteAlreadyLiked = this.isNoteAlreadyLiked.bind(this);
   }
 
   componentDidMount(){
@@ -40,8 +46,74 @@ export default class Note extends Component {
     else{
       this.setState({colour:"cyan.200"})
     }
-  }
+ }
+
+ likeNote(){
+    fetch('note/AddLike/'+this.props.id,
+    {"method":"POST", "headers": {'Content-Type': 'application/json'}})
+    .then(this.props.refreshBoard).then(this.updateLikedNoteList)
+ }
+
+ unlikeNote(){
+  fetch('note/RemoveLike/'+this.props.id,
+  {"method":"POST", "headers": {'Content-Type': 'application/json'}})
+  .then(this.props.refreshBoard).then(this.removeFromLikedNoteList).then(this.isNoteAlreadyLiked)
+}
   
+ updateLikedNoteList(){
+  const cookies = new Cookies();
+
+  let likedByUser = cookies.get('likes')
+
+  if(likedByUser == undefined){
+    let likedByUserList = []
+
+    const current = new Date();
+    const nextYear = new Date();
+    nextYear.setFullYear(current.getFullYear() + 1);
+
+    likedByUserList.push(this.props.id)
+    cookies.set('likes', JSON.stringify(likedByUserList), { path: '/', expires:nextYear })
+  }
+  else{
+    likedByUser.push(this.props.id)
+
+    const current = new Date();
+    const nextYear = new Date();
+    nextYear.setFullYear(current.getFullYear() + 1);
+
+    cookies.set('likes', JSON.stringify(likedByUser), { path: '/', expires:nextYear })
+  }
+ }
+
+ removeFromLikedNoteList(){
+  const cookies = new Cookies();
+
+  let likedByUser = cookies.get('likes')
+
+  console.log(likedByUser)
+
+  const index = likedByUser.indexOf(this.props.id);
+  if (index > -1) {
+    likedByUser.splice(index, 1);
+  }
+
+  console.log(likedByUser)
+
+  const current = new Date();
+  const nextYear = new Date();
+  nextYear.setFullYear(current.getFullYear() + 1);
+
+  cookies.set('likes', JSON.stringify(likedByUser), { path: '/', expires:nextYear })
+ }
+
+ isNoteAlreadyLiked(){
+  const cookies = new Cookies();
+  let likedByUser = cookies.get('likes')
+
+  return likedByUser.includes(this.props.id)
+ }
+
  render(){
     return (
       <>
@@ -60,12 +132,16 @@ export default class Note extends Component {
           <Flex justifyContent="space-between" alignItems="self-end">
             <HStack>
                 <chakra.span fontSize="lg" color="red.500">
-                    <Tooltip label="Leave a like">
-                        <button><BsHeart></BsHeart></button>
+                    <Tooltip label={this.isNoteAlreadyLiked() ? "Remove like" : "Leave a like"}>
+
+                        {this.isNoteAlreadyLiked() ? 
+                          <button onClick={this.unlikeNote}><BsFillHeartFill></BsFillHeartFill></button>
+                        : <button onClick={this.likeNote}><BsHeart></BsHeart></button> }
+
                     </Tooltip>                  
                 </chakra.span>
-                <Text>
-                    5
+                <Text pb={1} fontWeight="semibold">
+                    {this.props.likes}
                 </Text>
             </HStack>        
           </Flex>
@@ -76,7 +152,7 @@ export default class Note extends Component {
               size="md"
               resize={"none"}
             >
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In turpis risus, sodales eu diam sed.</Text>
+                <Text>{this.props.text}</Text>
             </Container>
           </Box>
         </Box>

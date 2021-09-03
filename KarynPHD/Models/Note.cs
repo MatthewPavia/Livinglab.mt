@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Azure.Data.Tables;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,16 @@ namespace KarynPHD.Models
     public class Note
     {
         [JsonProperty(PropertyName = "id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty(PropertyName = "text")]
-        public string text { get; set; }
+        public string Text { get; set; }
 
         [JsonProperty(PropertyName = "likes")]
-        public int likes { get; set; }
+        public int? Likes { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTimeOffset? timestamp { get; set; }
 
     }
 }

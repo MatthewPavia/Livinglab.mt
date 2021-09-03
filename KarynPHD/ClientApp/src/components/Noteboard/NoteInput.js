@@ -44,8 +44,7 @@ export default class NoteInput extends Component {
   }
   
   handleChange(event){
-  
-    if(event.target.value.length > 280){
+    if((event.target.value.length > 280) || (event.target.value.length <= 1) ){
       this.setState({isInvalid:true})
     }
     else{
@@ -54,15 +53,22 @@ export default class NoteInput extends Component {
   }
 
   handleSubmit(){
-    console.log(JSON.stringify(this.state.inputText))
-    fetch('note', {
-      method:'POST',
-      body:JSON.stringify(this.state.inputText), 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then()
-    .catch(error => console.log(error))
+
+    if(this.state.inputText.length <= 1){
+      this.setState({isInvalid:true})
+    }
+    else{
+      this.setState({isInvalid:false})
+      fetch('note', {
+        method:'POST',
+        body:JSON.stringify(this.state.inputText.trim()), 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(this.props.toggleNoteInputDisplay)
+      .then(this.props.refreshBoard)
+      .catch(error => console.log(error))
+    }
   }
 
  render(){
