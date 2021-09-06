@@ -38,13 +38,13 @@ export default class Note extends Component {
     let number = Math.floor(Math.random() * (4 - 1) + 1);
   
     if(number == 1){
-      this.setState({colour:"yellow.200"})
+      this.setState({colour:"#F8E689"})
     }
     else if(number == 2){
-      this.setState({colour:"pink.200"})
+      this.setState({colour:"#EF9A69"})
     }
     else{
-      this.setState({colour:"cyan.200"})
+      this.setState({colour:"#8DDCD8"})
     }
  }
 
@@ -111,6 +111,10 @@ export default class Note extends Component {
   const cookies = new Cookies();
   let likedByUser = cookies.get('likes')
 
+  if (likedByUser === undefined){
+    return false
+  }
+
   return likedByUser.includes(this.props.id)
  }
 
@@ -131,8 +135,8 @@ export default class Note extends Component {
         >
           <Flex justifyContent="space-between" alignItems="self-end">
             <HStack>
-                <chakra.span fontSize="lg" color="red.500">
-                    <Tooltip label={this.isNoteAlreadyLiked() ? "Remove like" : "Leave a like"}>
+                <chakra.span fontSize="lg" color="#a63a3c">
+                    <Tooltip label={this.isNoteAlreadyLiked() ? "Remove heart" : "Leave a heart"}>
 
                         {this.isNoteAlreadyLiked() ? 
                           <button onClick={this.unlikeNote}><BsFillHeartFill></BsFillHeartFill></button>
@@ -151,6 +155,7 @@ export default class Note extends Component {
               h={52}
               size="md"
               resize={"none"}
+              overflowY={"auto"}
             >
                 <Text>{this.props.text}</Text>
             </Container>

@@ -53,7 +53,7 @@ export default function NavMenu() {
           />
 
           <HStack spacing={8} alignItems={'center'}>
-            <Text color="gray.50" fontSize="xl" >MobilitAzzjoni</Text>
+            <Text color="eucalyptus.300" fontSize="xl" >MobilitAzzjoni</Text>
           </HStack>
 
             <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper></Stepper></Box>       

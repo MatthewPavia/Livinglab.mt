@@ -1,8 +1,9 @@
-import { Box, Center, Square, Circle, Flex, HStack, SimpleGrid, Container, Text, IconButton, Tooltip  } from "@chakra-ui/react";
+import {Heading,Button, Box, Center, Square, Circle, Flex, HStack, VStack, SimpleGrid, Container, Text, IconButton, Tooltip  } from "@chakra-ui/react";
 import React, { Component } from "react";
 import NoteInput from "./NoteInput";
 import Note from "./Note";
 import { AddIcon } from '@chakra-ui/icons'
+import { Footer } from '../Nav/Footer';
 
 export default class Noteboard extends Component {
     constructor(props) {
@@ -96,7 +97,7 @@ export default class Noteboard extends Component {
                     splitNotes.map( (x,i) =>
                         <SimpleGrid key={i} columns={{lg:4, md:2, sm:1}} px={{lg:200, md:5, sm:5}} pr={2} spacing={4}>
                             {x.map( y =>
-                                <Note key={y.id} text={y.text} likes={y.likes} id={y.id} refreshBoard={this.fetchNoteData}></Note>
+                                <Note maxW="20%" key={y.id} text={y.text} likes={y.likes} id={y.id} refreshBoard={this.fetchNoteData}></Note>
                             )}
                         </SimpleGrid>
                     )
@@ -111,24 +112,19 @@ export default class Noteboard extends Component {
             <>
                 <Box  width='100%' height='100%' position='relative' >
                     <Box position='absolute' width='100%' height='100%'>
-                        <Box p={4}>
-                            <HStack spacing={12}>
-                                <Text fontSize={{md:"3xl", sm:"2xl"}} pl={10}>Suggestion Noteboard</Text>
-                                <Tooltip label="Add a note">
-                                    <IconButton
-                                    variant="outline"
-                                    colorScheme="auburn"
-                                    aria-label="Call Sage"
-                                    fontSize="20px"
-                                    size="sm"
-                                    icon={<AddIcon />}
-                                    onClick={this.toggleNoteInputDisplay}
-                                    />
-                                </Tooltip>
-                                
-                            </HStack>
-                        </Box>
+                            <HStack spacing={0} p={4} justify="space-evenly">
+                                <Box>
+                                    <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5} >Idea Board</Heading>
+                                    <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"60%", sm:"80%"}}>Think of a space or street in Malta that you would like to see improved to  encourage more people to walk or cycle. 
+                                            If you see other ideas you agree with, ‘heart’ them! 
+                                    </Text>
+                                </Box>
 
+                                <Button rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
+                                Add Idea
+                                </Button>
+                                                         
+                            </HStack>
 
                         {this.displayNotes()}
                     </Box> 
@@ -140,6 +136,10 @@ export default class Noteboard extends Component {
                         <NoteInput toggleNoteInputDisplay={this.toggleNoteInputDisplay} refreshBoard={this.fetchNoteData}/>
                     </Box></> : <></>  }
                                       
+                    
+                    <Box position="fixed" width="100%" bottom={0}>
+                        <Footer></Footer>
+                    </Box>
                 </Box>                
             </>                  
         )    

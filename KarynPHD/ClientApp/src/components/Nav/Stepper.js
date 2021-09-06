@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/layout';
 
 const steps = [
   { label: 'Issues' },
-  { label: 'Solutions' },
+  { label: 'Ideas' },
   { label: 'Feedback' },
 ];
 

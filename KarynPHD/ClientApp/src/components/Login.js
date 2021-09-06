@@ -20,6 +20,9 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import Cookies from 'universal-cookie';
 import { generate } from 'canihazusername'
+import {CustomToast} from './CustomToast'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export class Login extends Component {
 
@@ -36,11 +39,31 @@ export class Login extends Component {
       hideLogin:false
     };
 
+    this.CustomToastElement = React.createRef()
+
     this.onValid = this.onValid.bind(this);
     this.ageInput = this.ageInput.bind(this);
     this.localityInput = this.localityInput.bind(this);
     this.submit = this.submit.bind(this);
     this.areAllInputsFilled = this.areAllInputsFilled.bind(this);
+    this.enableScrolling = this.enableScrolling.bind(this);
+    this.disableScrolling = this.disableScrolling.bind(this);
+  }
+
+  notify = () => toast.error('Sorry! You need to be over 18.', {
+                                position: "bottom-center",
+                                autoClose: false,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: false,
+                                draggable: true,
+                                progress: undefined,
+                                });
+
+  dismissAll = () =>  toast.dismiss();
+
+  componentDidMount(){
+    this.disableScrolling()
   }
 
   onValid(){
@@ -48,6 +71,11 @@ export class Login extends Component {
   }
 
   ageInput(event){
+
+    if(event.target.value < 18){
+      this.CustomToastElement.current.toastError("Sorry! You need to be over 18.")
+    }
+
     this.setState({age:event.target.value})
   }
 
@@ -92,6 +120,7 @@ export class Login extends Component {
         },
       }).then(() => this.setUserCookies(username))
       .then(() => this.setState({hideLogin:true}))
+      .then(this.enableScrolling)
       .catch(error => console.log(error))
     }
     else{
@@ -99,15 +128,27 @@ export class Login extends Component {
     }
   }
 
+  disableScrolling(){
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);};
+  }
+
+  enableScrolling(){
+      window.onscroll=function(){};
+  }
+
   render () {
-      return (
+      return (  
         <>
+        <CustomToast ref={this.CustomToastElement} />
+
           {this.state.hideLogin ? <></> :
             <Flex
               minH={'100vh'}
               align={'center'}
               justify={'center'}       
-              bg='rgba(228, 230, 235, 0.9)'
+              bg='rgba(196, 196, 196, 0.6)'
               >
               <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
@@ -123,7 +164,7 @@ export class Login extends Component {
                     <HStack spacing={4}>
                       <FormControl id="age" maxWidth="20" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
                         <FormLabel>Age</FormLabel>
-                        <NumberInput min={16} max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
+                        <NumberInput max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
                       </FormControl>
                       <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
                         <FormLabel>Locality</FormLabel>

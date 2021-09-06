@@ -4,7 +4,8 @@ import {
   Box,
   Flex,
   Textarea,
-  IconButton
+  IconButton,
+  CloseButton
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { data } from "jquery";
@@ -16,7 +17,8 @@ export default class NoteInput extends Component {
     this.state = { 
       isInvalid:false,
       colour:"",
-      inputText: ""
+      inputText: "",
+      noteHasAlreadyBeenEntered:true
     };   
     
     this.randomColour = this.randomColour.bind(this);
@@ -33,13 +35,13 @@ export default class NoteInput extends Component {
     let number = Math.floor(Math.random() * (4 - 1) + 1);
   
     if(number == 1){
-      this.setState({colour:"yellow.200"})
+      this.setState({colour:"#F8E689"})
     }
     else if(number == 2){
-      this.setState({colour:"pink.200"})
+      this.setState({colour:"#EF9A69"})
     }
     else{
-      this.setState({colour:"cyan.200"})
+      this.setState({colour:"#8DDCD8"})
     }
   }
   
@@ -88,8 +90,10 @@ export default class NoteInput extends Component {
         >
           <Flex justifyContent="space-between" alignItems="center">
             <chakra.span pl={4} fontSize="md" color={"gray.700"}>
-              Leave a suggestion
-            </chakra.span>        
+              Submit an idea
+            </chakra.span>
+            {this.state.noteHasAlreadyBeenEntered ?
+            <CloseButton onClick={this.props.toggleNoteInputDisplay}></CloseButton> : <></> }        
           </Flex>
 
           <Box padding="3" >
