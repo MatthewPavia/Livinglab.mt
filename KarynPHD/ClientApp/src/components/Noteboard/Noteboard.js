@@ -9,7 +9,7 @@ export default class Noteboard extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-          displayInput: false,
+          displayInput: true,
           notes:[]
         };       
         
@@ -137,7 +137,7 @@ export default class Noteboard extends Component {
                     </Box></> : <></>  }
                                       
                     
-                    <Box position="fixed" width="100%" bottom={0}>
+                   <Box position="fixed" width="100%" bottom={0}>
                         <Footer></Footer>
                     </Box>
                 </Box>                

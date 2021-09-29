@@ -31,8 +31,7 @@ export class SolutionBox extends Component {
         this.handleRatingChange = this.handleRatingChange.bind(this)
     }
 
-    handleRatingChange(event){
-        console.log(event.target.value)
+    handleRatingChange(event){        
         this.props.setAnswers('rating',event.target.value)
     }
 
@@ -48,34 +47,34 @@ export class SolutionBox extends Component {
         return(
             <>
             <HStack p={2} display={{md:"none",base:"flex"}} justify="space-evenly">
-                <IconButton  isDisabled={this.props.currentSolution==0} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
-                <IconButton colorScheme="eucalyptus" mr={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.decrementCurrentSolution} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} colorScheme="eucalyptus" mr={4} icon={<ArrowForwardIcon/>}/>
             </HStack>
             <Center py={6}>
-                <IconButton size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==0} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
+                <IconButton onClick={this.props.decrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
                 <Box maxW={{md:'80%',base:'95%'}} w={'full'} bg={'white'} boxShadow={'2xl'} rounded={'md'} p={6} overflow={'hidden'}>         
 
                     <VStack spacing={2}> 
                         <Stack>
                             <HStack spacing={2}>                       
-                                <Box className="numberCircle" fontSize={{md:"2xl",base:"md"}}>1</Box>
+                                <Box className="numberCircle" fontSize={{md:"2xl",base:"md"}}>{this.props.number}</Box>
                                 <Text p={2} color={'auburn.500'} textTransform={''} fontWeight={700} fontSize={'lg'} letterSpacing={''}>
-                                Street Reconfiguration
+                                {this.props.title}
                                 </Text>                                                      
                             </HStack>
-                            <Text pl={16} color={'gray.700'} fontSize={{md:"lg",base:"sm"}}>
-                                Reconfigure the street from 2 lanes into a single lane for vehicles and buses, with one side for vehicle parking, creating more space for pedestrians and a 2-way cycling lane. The Msida promenade could be extended to Ta'Xbiex to form a continous pedestrian-oriented promenade.
+                            <Text pl={{md:16,base:2}} color={'gray.700'} fontSize={{md:"lg",base:"sm"}}>
+                                {this.props.description}
                             </Text>
                         </Stack>
 
                         <SimpleGrid columns={{md:2,sm:1}}  p={6} spacing={16} justify="center"> 
                             <VStack>
-                                <Text fontSize="sm" fontWeight={600}>Triq ix-Xatt, Msida</Text>
-                                <Image htmlHeight={250} htmlWidth={450} src="https://mobilitazzjonistore.blob.core.windows.net/images/Msida%20triq%20ix-xatt.JPG"/>
+                                <Text fontSize="sm" fontWeight={600}>{this.props.img1Title}</Text>
+                                <Image htmlHeight={250} htmlWidth={450} src={this.props.img1Url}/>
                             </VStack>      
                             <VStack>
-                                <Text fontSize="sm" fontWeight={600}>Idea Design</Text>
-                                <Image htmlHeight={250} htmlWidth={450} src="https://mobilitazzjonistore.blob.core.windows.net/images/images (1).JPG"/>
+                                <Text fontSize="sm" fontWeight={600}>{this.props.img2Title}</Text>
+                                <Image htmlHeight={250} htmlWidth={450} src={this.props.img2Url}/>
                             </VStack>                                    
                         </SimpleGrid>           
 
@@ -100,7 +99,7 @@ export class SolutionBox extends Component {
                         </Box>
                     </VStack>    
                 </Box>
-                <IconButton size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={<ArrowForwardIcon/>}/>
             </Center>
             </>
         )

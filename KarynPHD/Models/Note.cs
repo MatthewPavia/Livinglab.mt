@@ -18,6 +18,9 @@ namespace KarynPHD.Models
         [JsonProperty(PropertyName = "likes")]
         public int? Likes { get; set; }
 
+        [JsonProperty(PropertyName = "postedby")]
+        public string PostedBy { get; set; }
+
         public DateTime Created { get; set; }
         public DateTimeOffset? timestamp { get; set; }
 

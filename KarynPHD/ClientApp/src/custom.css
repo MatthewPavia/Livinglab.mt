@@ -41,3 +41,11 @@ code {
     font-size: 24px;
   }
 }
+
+.emojiButton:hover {
+  filter: brightness(45%);
+}
+
+.emojiButton:active {
+  filter: brightness(45%);
+}

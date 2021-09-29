@@ -22,7 +22,7 @@ namespace KarynPHD.Controllers
         public IConfiguration Configuration { get; }
 
         [HttpPost]
-        public IActionResult Post([FromBody] string noteText)
+        public IActionResult Post([FromBody] NoteDTO note)
         {
             try
             {
@@ -35,8 +35,9 @@ namespace KarynPHD.Controllers
 
                 var entity = new TableEntity("Note", Guid.NewGuid().ToString())
                 {
-                    { "Text", noteText },
+                    { "Text", note.Text },
                     { "Likes", 0 },
+                    { "PostedBy", note.PostedBy },
                     { "Created",  DateTime.Now.ToString()}
                 };
 
@@ -110,6 +111,7 @@ namespace KarynPHD.Controllers
                  {
                         { "Text", qEntity.GetString("Text") },
                         { "Likes", incrementedLikes },
+                        { "PostedBy", qEntity.GetString("PostedBy") },
                         { "Created", qEntity.GetString("Created") }
                  };
 

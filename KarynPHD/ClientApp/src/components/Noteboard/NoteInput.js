@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { data } from "jquery";
+import Cookies from 'universal-cookie';
 
 export default class NoteInput extends Component {
 
@@ -55,6 +56,8 @@ export default class NoteInput extends Component {
   }
 
   handleSubmit(){
+    const cookies = new Cookies();
+
 
     if(this.state.inputText.length <= 1){
       this.setState({isInvalid:true})
@@ -63,7 +66,7 @@ export default class NoteInput extends Component {
       this.setState({isInvalid:false})
       fetch('note', {
         method:'POST',
-        body:JSON.stringify(this.state.inputText.trim()), 
+        body:JSON.stringify({"Text":this.state.inputText.trim(),"PostedBy":cookies.get('username')}), 
         headers: {
           'Content-Type': 'application/json',
         },
