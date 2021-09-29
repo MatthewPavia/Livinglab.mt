@@ -35,6 +35,7 @@ export class Login extends Component {
       displayName:'',
       age: 0,
       locality:'',
+      gender:'',
       submitted:false,
       hideLogin:false
     };
@@ -48,6 +49,7 @@ export class Login extends Component {
     this.areAllInputsFilled = this.areAllInputsFilled.bind(this);
     this.enableScrolling = this.enableScrolling.bind(this);
     this.disableScrolling = this.disableScrolling.bind(this);
+    this.genderInput = this.genderInput.bind(this);
   }
 
   notify = () => toast.error('Sorry! You need to be over 18.', {
@@ -83,6 +85,11 @@ export class Login extends Component {
     this.setState({locality:event.target.value})
   }
 
+  genderInput(event){
+    console.log(event.target.value)
+    this.setState({gender:event.target.value})
+  }
+
   areAllInputsFilled(userDetails){
     for (var detail in userDetails) {
       if (userDetails[detail] == null || userDetails[detail] == "" || userDetails[detail] == 0)
@@ -108,6 +115,7 @@ export class Login extends Component {
     let userDetails = {
       "username" : username,
       "age":this.state.age,
+      "gender":this.state.gender,
       "locality":this.state.locality
     }
 
@@ -161,12 +169,22 @@ export class Login extends Component {
                   p={8}>
                   <Stack spacing={4}>
 
-                    <HStack spacing={4}>
+                    <HStack spacing={2}>
                       <FormControl id="age" maxWidth="20" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
                         <FormLabel>Age</FormLabel>
                         <NumberInput max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
                       </FormControl>
-                      <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
+                      
+                      <FormControl id="gender" maxWidth="80" isRequired isInvalid={this.state.gender == '' && this.state.submitted == true}>
+                        <FormLabel>Gender</FormLabel>
+                        <Select placeholder="Select Gender" onBlur={this.genderInput}>
+                          <option key={'M'}>Male</option>
+                          <option key={'F'}>Female</option>
+                          <option key={'Other'}>Other</option>
+                        </Select>
+                      </FormControl>
+                    </HStack>
+                    <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
                         <FormLabel>Locality</FormLabel>
                         <Select placeholder="Select locality" onBlur={this.localityInput}>
                           {this.state.localities.map
@@ -174,8 +192,6 @@ export class Login extends Component {
                           }                         
                         </Select>
                       </FormControl>
-                    </HStack>
-                  
                     <ReCAPTCHA
                       sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
                       onChange={this.onValid}

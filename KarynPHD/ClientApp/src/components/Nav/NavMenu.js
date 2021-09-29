@@ -37,7 +37,7 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function NavMenu() {
+export default function NavMenu(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -70,7 +70,7 @@ export default function NavMenu() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={1}>
-              <Stepper></Stepper>
+              <Stepper currentCompletion={props.currentCompletion}></Stepper>
             </Stack>
             <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
               <Button variant="solid" mr="-px">En</Button>

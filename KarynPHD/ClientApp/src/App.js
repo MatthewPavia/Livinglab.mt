@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Main } from './components/Main';
 import { Login } from './components/Login';
+import {SolutionSpace} from './components/SolutionSpace/SolutionSpace'
 
 import './custom.css'
 import Cookies from 'universal-cookie';
@@ -11,7 +12,6 @@ import { Redirect } from 'react-router-dom';
 
 export default class App extends Component {
   static displayName = App.name;
-
 
   isAuth(){
     const cookies = new Cookies();

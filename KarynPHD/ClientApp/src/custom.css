@@ -4,11 +4,40 @@ a {
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+@media (max-width: 760px) {
+  /* styles when screen is greater than 420px wide but less than 760px */
+  /* omitting the 'and (max-width: 760px)' would cause these styles to apply at any width above 420px unless overridden by another media query */
+  .numberCircle {
+    width: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    filter: drop-shadow(1px 3px 2px #949496);
+    background-color: #7c9f95;
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 760px) {
+  /* styles when screen is greater than 760px wide */
+  .numberCircle {
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    filter: drop-shadow(1px 3px 2px #949496);
+    background-color: #7c9f95;
+    font-size: 24px;
+  }
 }

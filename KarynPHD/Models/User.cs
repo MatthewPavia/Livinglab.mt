@@ -17,6 +17,9 @@ namespace KarynPHD.Models
         [JsonProperty(PropertyName = "age")]
         public string age { get; set; }
 
+        [JsonProperty(PropertyName = "gender")]
+        public string gender { get; set; }
+
         [JsonProperty(PropertyName = "locality")]
         public string locality { get; set; }
     }
