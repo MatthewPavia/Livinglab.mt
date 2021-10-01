@@ -19,7 +19,8 @@ export class SolutionSpace extends Component {
           solutions:[],
           currentSolutionDetails:{},
           answers:[{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''}],
-          currentSolution:1
+          currentSolution:1,
+          totalSolutions:2
         };
         
         this.setAnswers = this.setAnswers.bind(this)
@@ -35,7 +36,6 @@ export class SolutionSpace extends Component {
 
     getCurrentSolutionDetails(){
         let currentSolutionDetails = this.state.solutions.find(x => x.number == this.state.currentSolution)
-        console.log(currentSolutionDetails)
         this.setState({currentSolutionDetails:currentSolutionDetails})
     }
 
@@ -68,7 +68,7 @@ export class SolutionSpace extends Component {
                         <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>Tell us what you think about these proposed solutions</Text>
                     </Box>
                 </HStack>
-                <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} description={this.state.currentSolutionDetails.description} img1Title={this.state.currentSolutionDetails.img1Title} img1Url={this.state.currentSolutionDetails.img1Url} img2Title={this.state.currentSolutionDetails.img2Title} img2Url={this.state.currentSolutionDetails.img2Url} currentSolution={this.state.currentSolution} setAnswers={this.setAnswers} incrementCurrentSolution={this.incrementCurrentSolution} decrementCurrentSolution={this.decrementCurrentSolution}></SolutionBox>
+                <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} description={this.state.currentSolutionDetails.description} img1Title={this.state.currentSolutionDetails.img1Title} img1Url={this.state.currentSolutionDetails.img1Url} img2Title={this.state.currentSolutionDetails.img2Title} img2Url={this.state.currentSolutionDetails.img2Url} currentSolution={this.state.currentSolution} totalSolutions={this.state.totalSolutions} answers={this.state.answers} setAnswers={this.setAnswers} incrementCurrentSolution={this.incrementCurrentSolution} decrementCurrentSolution={this.decrementCurrentSolution}></SolutionBox>
             </Box>
             </>
         )

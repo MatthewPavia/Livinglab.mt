@@ -98,8 +98,6 @@ export default class Note extends Component {
     likedByUser.splice(index, 1);
   }
 
-  console.log(likedByUser)
-
   const current = new Date();
   const nextYear = new Date();
   nextYear.setFullYear(current.getFullYear() + 1);

@@ -51,8 +51,9 @@ namespace KarynPHD.Controllers
             }
         }
 
+        [Route("{sort}")]
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string sort)
         {
             try
             {
@@ -82,7 +83,10 @@ namespace KarynPHD.Controllers
                     notes.Add(note);
                 }
 
-
+                if (sort == "likes")
+                {
+                    return Ok(notes.OrderByDescending(x => x.Likes).ToList());
+                }
                 return Ok(notes.OrderByDescending(x => x.Created).ToList());
             }
             catch (Exception e)

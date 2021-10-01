@@ -40,6 +40,8 @@ const NavLink = ({ children }) => (
 export default function NavMenu(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  console.log(props.currentCompletion)
+
   return (
     <>
       <Box bg={'eucalyptus.300'} px={4}>
@@ -56,7 +58,7 @@ export default function NavMenu(props) {
             <Text color="eucalyptus.300" fontSize="xl" >MobilitAzzjoni</Text>
           </HStack>
 
-            <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper></Stepper></Box>       
+            <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper currentCompletion={props.currentCompletion}></Stepper></Box>       
             <Flex alignItems={'center'} display={{ base: 'none', md: 'flex' }}>
 
               <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>

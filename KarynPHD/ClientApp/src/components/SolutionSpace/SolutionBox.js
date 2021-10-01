@@ -48,7 +48,7 @@ export class SolutionBox extends Component {
             <>
             <HStack p={2} display={{md:"none",base:"flex"}} justify="space-evenly">
                 <IconButton onClick={this.props.decrementCurrentSolution} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
-                <IconButton onClick={this.props.incrementCurrentSolution} colorScheme="eucalyptus" mr={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={this.props.currentSolution==this.props.totalSolutions} colorScheme="eucalyptus" mr={4} icon={<ArrowForwardIcon/>}/>
             </HStack>
             <Center py={6}>
                 <IconButton onClick={this.props.decrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
@@ -78,17 +78,17 @@ export class SolutionBox extends Component {
                             </VStack>                                    
                         </SimpleGrid>           
 
-                        <SolutionRating handleRatingChange={this.handleRatingChange} ></SolutionRating>
+                        <SolutionRating answers={this.props.answers} currentSolution={this.props.currentSolution} handleRatingChange={this.handleRatingChange} ></SolutionRating>
                         
                         <Box justify="left">
                             <FormControl isRequired p={2}>
                                 <FormLabel>Your Opinion:</FormLabel>
-                                <Textarea isRequired justify="center" onBlur={this.handleTextareaChange} placeholder="Why did you make this decision? How can this solution be improved?" size="sm"/>
+                                <Textarea isRequired value={this.props.answers[this.props.currentSolution]['opinion']} justify="center" onChange={this.handleTextareaChange} placeholder="Why did you make this decision? How can this solution be improved?" size="sm"/>
                             </FormControl>
 
                             <FormControl isRequired p={2} pt={4}>
                                 <FormLabel>Would such an intervention encourage you to walk more for short distance trips?</FormLabel>
-                                <RadioGroup onChange={this.handleRadioChange}>
+                                <RadioGroup value={this.props.answers[this.props.currentSolution]['encouraged']} onChange={this.handleRadioChange}>
                                 <VStack align="left">
                                     <Radio value="Yes">Yes</Radio>
                                     <Radio value="No">No</Radio>
@@ -99,7 +99,7 @@ export class SolutionBox extends Component {
                         </Box>
                     </VStack>    
                 </Box>
-                <IconButton onClick={this.props.incrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={this.props.currentSolution==this.props.totalSolutions} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={<ArrowForwardIcon/>}/>
             </Center>
             </>
         )

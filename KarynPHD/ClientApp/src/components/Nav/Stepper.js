@@ -1,20 +1,20 @@
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import React, { Component } from 'react';
 import { Flex } from '@chakra-ui/layout';
+import Cookies from 'universal-cookie';
 
 const steps = [
   { label: 'Issues' },
   { label: 'Ideas' },
-  { label: 'Feedback' },
+  { label: 'Solutions' },
 ];
 
 export default function Stepper(props) {
-  const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
-    initialStep: 0,
-  });
+  
+  console.log(props.currentCompletion)
 
   return (
-    <Steps activeStep={2} colorScheme='auburn' responsive={true}>
+    <Steps activeStep={parseInt(props.currentCompletion)} colorScheme='auburn' responsive={true}>
       {steps.map(({ label }) => (
         <Step label={label} key={label}>
         </Step>
