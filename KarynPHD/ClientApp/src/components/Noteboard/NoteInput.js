@@ -72,7 +72,7 @@ export default class NoteInput extends Component {
         },
       }).then(this.props.toggleNoteInputDisplay)
       .then(this.props.refreshBoard)
-      .then(this.props.completePage)
+      .then(this.props.ideaSubmitted)
       .catch(error => console.log(error))
     }
   }

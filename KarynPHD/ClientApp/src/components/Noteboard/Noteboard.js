@@ -2,7 +2,7 @@ import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStac
 import React, { Component } from "react";
 import NoteInput from "./NoteInput";
 import Note from "./Note";
-import { AddIcon } from '@chakra-ui/icons'
+import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Footer } from '../Nav/Footer';
 
 export default class Noteboard extends Component {
@@ -11,7 +11,8 @@ export default class Noteboard extends Component {
         this.state = { 
           displayInput: false,
           notes:[],
-          sorting:'recent'
+          sorting:'recent',
+          ideaHasBeenSubmitted:false
         };       
         
         this.toggleNoteInputDisplay = this.toggleNoteInputDisplay.bind(this)
@@ -21,6 +22,7 @@ export default class Noteboard extends Component {
         this.enableScrolling = this.enableScrolling.bind(this)
         this.fetchNoteData = this.fetchNoteData.bind(this)
         this.changeSorting = this.changeSorting.bind(this)
+        this.ideaSubmitted = this.ideaSubmitted.bind(this)
     }
 
     componentDidMount(){
@@ -114,12 +116,16 @@ export default class Noteboard extends Component {
         }
     }
 
+    ideaSubmitted(){
+        this.setState({ideaHasBeenSubmitted:true})
+    }
+
     render(){
         return(
             <>
                 <Box  width='100%' height='100%' position='relative' >
                     <Box position='absolute' width='100%' height='100%'>
-                        <HStack spacing={0} p={4} justify="space-evenly">
+                        <HStack spacing={4} p={4} justify="space-evenly">
                             <Box>
                                 <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5} >Idea Board</Heading>
                                 <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"60%", sm:"80%"}}>Think of a space or street in Malta that you would like to see improved to  encourage more people to walk or cycle. 
@@ -127,10 +133,15 @@ export default class Noteboard extends Component {
                                 </Text>
                             </Box>
 
-                            <Button rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
+                            <Button pr={4} rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
                             Add Idea
                             </Button>
-                                                        
+
+                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label="Please leave a note to proceed.">
+                                <span>
+                                <Button onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                                </span>
+                            </Tooltip>                     
                         </HStack>
                         <Select pl={5} onChange={this.changeSorting} maxWidth={{lg:"6%",md:"12%",base:"29%"}} size={{md:"sm",base:"sm"}} placeholder="Sort By">
                             <option value="recent">Recent</option>
@@ -143,10 +154,9 @@ export default class Noteboard extends Component {
                     <> 
                     <Box position="fixed" width='100%' height='100%' bg='rgba(196, 196, 196, 0.6)' zIndex={5}></Box>
                     <Box position='fixed' width='100%' height='100%' left={0} top={300} zIndex={10}>
-                        <NoteInput completePage={this.props.completePage} toggleNoteInputDisplay={this.toggleNoteInputDisplay} refreshBoard={this.fetchNoteData}/>
+                        <NoteInput ideaSubmitted={this.ideaSubmitted} completePage={this.props.completePage} toggleNoteInputDisplay={this.toggleNoteInputDisplay} refreshBoard={this.fetchNoteData}/>
                     </Box></> : <></>  }
-                                      
-                    
+                                                         
                    <Box position="fixed" width="100%" bottom={0}>
                        
                     </Box>
