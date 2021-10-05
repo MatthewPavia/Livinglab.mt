@@ -34,7 +34,7 @@ export default class Noteboard extends Component {
     }
 
     fetchNoteData(){
-        fetch('note/'+this.state.sorting, {"method":"GET"}).then(res => res.json()).then(data => this.setState({notes:data}))   
+        fetch('note/Get/'+this.state.sorting, {"method":"GET"}).then(res => res.json()).then(data => this.setState({notes:data}))   
     }
 
     disableScrolling(){

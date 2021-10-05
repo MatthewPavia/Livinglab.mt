@@ -51,7 +51,7 @@ namespace KarynPHD.Controllers
             }
         }
 
-        [Route("{sort}")]
+        [Route("Get/{sort}")]
         [HttpGet]
         public IActionResult Get(string sort)
         {
