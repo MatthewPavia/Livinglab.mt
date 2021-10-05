@@ -15,7 +15,7 @@ import {
     Avatar,
     HStack,VStack,Button, Tooltip,Radio,RadioGroup,FormControl,FormLabel,SimpleGrid
   } from "@chakra-ui/react";
-  import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+  import { ArrowBackIcon, ArrowForwardIcon, CheckIcon } from '@chakra-ui/icons'
 import { SolutionRating } from "./SolutionRating";
 
 export class SolutionBox extends Component {
@@ -43,12 +43,19 @@ export class SolutionBox extends Component {
         this.props.setAnswers('encouraged',event)
     }
 
+    isFinalSolutionBox(){
+        if(this.props.currentSolution==this.props.totalSolutions){
+            return true
+        }
+        return false
+    }
+
     render(){
         return(
             <>
             <HStack p={2} display={{md:"none",base:"flex"}} justify="space-evenly">
                 <IconButton onClick={this.props.decrementCurrentSolution} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
-                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={this.props.currentSolution==this.props.totalSolutions} colorScheme="eucalyptus" mr={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} colorScheme="eucalyptus" mr={4} icon={this.isFinalSolutionBox()?<CheckIcon/>:<ArrowForwardIcon/>}/>
             </HStack>
             <Center py={6}>
                 <IconButton onClick={this.props.decrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
@@ -99,7 +106,7 @@ export class SolutionBox extends Component {
                         </Box>
                     </VStack>    
                 </Box>
-                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={this.props.currentSolution==this.props.totalSolutions} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={<ArrowForwardIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={this.isFinalSolutionBox()?<CheckIcon/>:<ArrowForwardIcon/>}/>
             </Center>
             </>
         )

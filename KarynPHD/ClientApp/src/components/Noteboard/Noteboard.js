@@ -1,9 +1,11 @@
-import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStack, SimpleGrid, Container, Text, IconButton, Tooltip  } from "@chakra-ui/react";
+import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStack, SimpleGrid, Container, Text, IconButton, Tooltip, Stack  } from "@chakra-ui/react";
 import React, { Component } from "react";
 import NoteInput from "./NoteInput";
 import Note from "./Note";
 import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Footer } from '../Nav/Footer';
+import {CustomToast} from '../CustomToast'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class Noteboard extends Component {
     constructor(props) {
@@ -14,6 +16,8 @@ export default class Noteboard extends Component {
           sorting:'recent',
           ideaHasBeenSubmitted:false
         };       
+
+        this.CustomToastElement = React.createRef()
         
         this.toggleNoteInputDisplay = this.toggleNoteInputDisplay.bind(this)
         this.displayNotes = this.displayNotes.bind(this)
@@ -117,13 +121,18 @@ export default class Noteboard extends Component {
     }
 
     ideaSubmitted(){
+        if(this.state.ideaHasBeenSubmitted == false){
+            this.CustomToastElement.current.toastInfo('Thanks for the idea! You may add more ideas or continue to the next section!')
+        }
         this.setState({ideaHasBeenSubmitted:true})
     }
 
     render(){
         return(
             <>
-                <Box  width='100%' height='100%' position='relative' >
+                <CustomToast ref={this.CustomToastElement} />
+
+                <Box width='100%' height='100%' position='relative' >
                     <Box position='absolute' width='100%' height='100%'>
                         <HStack spacing={4} p={4} justify="space-evenly">
                             <Box>
@@ -133,6 +142,19 @@ export default class Noteboard extends Component {
                                 </Text>
                             </Box>
 
+                            <Button display={{md:"flex",base:"none"}} rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
+                            Add Idea
+                            </Button>
+
+                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label="Please leave a note to proceed.">
+                                <span>
+                                <Button display={{md:"flex",base:"none"}} onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                                </span>
+                            </Tooltip>     
+                        </HStack>
+
+                        {/*Displayed for mobile only */}
+                        <HStack display={{md:"none",base:"flex"}} justify="center">
                             <Button pr={4} rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
                             Add Idea
                             </Button>
@@ -141,12 +163,14 @@ export default class Noteboard extends Component {
                                 <span>
                                 <Button onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
                                 </span>
-                            </Tooltip>                     
+                            </Tooltip>  
                         </HStack>
-                        <Select pl={5} onChange={this.changeSorting} maxWidth={{lg:"6%",md:"12%",base:"29%"}} size={{md:"sm",base:"sm"}} placeholder="Sort By">
+
+                        <Select p={2} pl={5} onChange={this.changeSorting} maxWidth={{lg:"6%",md:"12%",base:"29%"}} size={{md:"sm",base:"sm"}} placeholder="Sort By">
                             <option value="recent">Recent</option>
                             <option value="likes">Likes</option>
                         </Select>
+
                         {this.displayNotes()}
                     </Box> 
                    

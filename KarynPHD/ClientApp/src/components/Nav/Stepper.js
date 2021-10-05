@@ -11,8 +11,6 @@ const steps = [
 
 export default function Stepper(props) {
   
-  console.log(props.currentCompletion)
-
   return (
     <Steps activeStep={parseInt(props.currentCompletion)} colorScheme='auburn' responsive={true}>
       {steps.map(({ label }) => (

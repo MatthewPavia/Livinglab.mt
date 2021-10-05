@@ -67,5 +67,47 @@ namespace KarynPHD.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] SolutionDTO userSolutions)
+        {
+
+            try
+            {
+                var configurationSection = Configuration.GetSection("AzureTable");
+                string uri = configurationSection.GetSection("Uri").Value;
+                string key = configurationSection.GetSection("Key").Value;
+                string account = configurationSection.GetSection("StorageAccountName").Value;
+
+                var tableClient = new TableClient(new Uri(uri), "SolutionsA", new TableSharedKeyCredential(account, key));
+
+
+                userSolutions.Answers = userSolutions.Answers.Skip(1).ToList();
+                int i = 1;
+
+                foreach (var ans in userSolutions.Answers)
+                {
+
+                    var entity = new TableEntity("SolutionAnswer", Guid.NewGuid().ToString())
+                    {
+                        { "Question", i },
+                        { "Rating", ans.rating },
+                        { "Opinion", ans.opinion },
+                        { "Encouragement", ans.encouraged },
+                        { "PostedBy",  userSolutions.PostedBy}
+                    };
+
+                    tableClient.AddEntity(entity);
+
+                    i++;
+                }
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

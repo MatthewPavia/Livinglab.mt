@@ -86,7 +86,6 @@ export class Login extends Component {
   }
 
   genderInput(event){
-    console.log(event.target.value)
     this.setState({gender:event.target.value})
   }
 

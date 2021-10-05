@@ -91,8 +91,6 @@ export default class Note extends Component {
 
   let likedByUser = cookies.get('likes')
 
-  console.log(likedByUser)
-
   const index = likedByUser.indexOf(this.props.id);
   if (index > -1) {
     likedByUser.splice(index, 1);

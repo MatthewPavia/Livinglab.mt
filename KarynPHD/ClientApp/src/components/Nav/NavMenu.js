@@ -40,8 +40,6 @@ const NavLink = ({ children }) => (
 export default function NavMenu(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(props.currentCompletion)
-
   return (
     <>
       <Box bg={'eucalyptus.300'} px={4}>

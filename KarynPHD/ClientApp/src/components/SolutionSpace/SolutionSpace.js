@@ -11,6 +11,7 @@ import {
     HStack,VStack,Button, Tooltip
   } from "@chakra-ui/react";
 import { SolutionBox } from "./SolutionBox";
+import Cookies from 'universal-cookie';
 
 export class SolutionSpace extends Component {
     constructor(props) {
@@ -30,8 +31,9 @@ export class SolutionSpace extends Component {
     }
 
     componentDidMount(){
-        fetch('solution', {"method":"GET"}).then(res => res.json()).then(data => this.setState({solutions:data},() => this.getCurrentSolutionDetails()))
-        
+        fetch('solution', {"method":"GET"})
+        .then(res => res.json())
+        .then(data => this.setState({solutions:data},() => this.getCurrentSolutionDetails()))
     }
 
     getCurrentSolutionDetails(){
@@ -47,9 +49,20 @@ export class SolutionSpace extends Component {
     }
 
     incrementCurrentSolution(){
-        let newCurrentSolution = this.state.currentSolution + 1
 
-        this.setState({currentSolution:newCurrentSolution}, ()=> this.getCurrentSolutionDetails())
+        if(this.state.currentSolution == this.state.totalSolutions){
+            const cookies = new Cookies();
+            fetch('solution',{
+                method:'POST',
+                body:JSON.stringify({"Answers":this.state.answers,"PostedBy":cookies.get('username')}),
+                headers:{'Content-Type': 'application/json'} 
+                })
+            .then(res => res.json())
+        }
+        else{
+            let newCurrentSolution = this.state.currentSolution + 1
+            this.setState({currentSolution:newCurrentSolution}, ()=> this.getCurrentSolutionDetails())
+        }     
     }
 
     decrementCurrentSolution(){
