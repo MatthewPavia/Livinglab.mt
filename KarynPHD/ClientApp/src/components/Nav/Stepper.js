@@ -1,7 +1,8 @@
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Flex } from '@chakra-ui/layout';
 import Cookies from 'universal-cookie';
+import LanguageContext from "../../languages/LanguageContext";
 
 const steps = [
   { label: 'Issues' },

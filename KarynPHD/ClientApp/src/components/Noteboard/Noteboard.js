@@ -6,8 +6,10 @@ import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Footer } from '../Nav/Footer';
 import {CustomToast} from '../CustomToast'
 import { ToastContainer, toast } from 'react-toastify';
+import LanguageContext from "../../languages/LanguageContext";
 
 export default class Noteboard extends Component {
+    static contextType = LanguageContext;
     constructor(props) {
         super(props);
         this.state = { 
@@ -128,6 +130,7 @@ export default class Noteboard extends Component {
     }
 
     render(){
+        const language = this.context;
         return(
             <>
                 <CustomToast ref={this.CustomToastElement} />
@@ -136,19 +139,18 @@ export default class Noteboard extends Component {
                     <Box position='absolute' width='100%' height='100%'>
                         <HStack spacing={4} p={4} justify="space-evenly">
                             <Box>
-                                <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5} >Idea Board</Heading>
-                                <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"60%", sm:"80%"}}>Think of a space or street in Malta that you would like to see improved to  encourage more people to walk or cycle. 
-                                        If you see other ideas you agree with, ‘heart’ them! 
+                                <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5} >{language.Noteboard.Title}</Heading>
+                                <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"60%", sm:"80%"}}>{language.Noteboard.Description}
                                 </Text>
                             </Box>
 
                             <Button display={{md:"flex",base:"none"}} rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
-                            Add Idea
+                            {language.Noteboard.Add}
                             </Button>
 
-                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label="Please leave a note to proceed.">
+                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label={language.Noteboard.NextTooltip}>
                                 <span>
-                                <Button display={{md:"flex",base:"none"}} onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                                <Button display={{md:"flex",base:"none"}} onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
                                 </span>
                             </Tooltip>     
                         </HStack>

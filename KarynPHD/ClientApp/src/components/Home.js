@@ -8,9 +8,13 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import en from '../languages/en.json'
+import mt from '../languages/mt.json'
+import LanguageContext from '../languages/LanguageContext';
 
 export class Home extends Component {
   static displayName = Home.name;
+  static contextType = LanguageContext;
 
   constructor(props) {
     super(props);
@@ -23,6 +27,8 @@ export class Home extends Component {
   }
 
   render () {
+    const language = this.context;
+
     return (
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} bg='eucalyptus.100' position={'relative'} style={{zIndex:1}}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -46,7 +52,7 @@ export class Home extends Component {
               <br />{' '}         
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis maximus ante.
+              {language.Home.Description}
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Button
@@ -57,9 +63,9 @@ export class Home extends Component {
                 _hover={{
                   bg: 'auburn.500',
                 }}>
-                Join Living Lab
+                {language.Home.JoinButton}
               </Button>
-              <Button rounded={'full'}>How It Works</Button>
+              <Button rounded={'full'}>{language.Home.InfoButton}</Button>
             </Stack>
           </Stack>
         </Flex>

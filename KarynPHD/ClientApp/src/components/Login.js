@@ -23,9 +23,10 @@ import { generate } from 'canihazusername'
 import {CustomToast} from './CustomToast'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LanguageContext from '../languages/LanguageContext';
 
 export class Login extends Component {
-
+  static contextType = LanguageContext;
   constructor(props) {
     super(props);
     this.state = { 
@@ -146,74 +147,77 @@ export class Login extends Component {
   }
 
   render () {
-      return (  
-        <>
-        <CustomToast ref={this.CustomToastElement} />
 
-          {this.state.hideLogin ? <></> :
-            <Flex
-              minH={'100vh'}
-              align={'center'}
-              justify={'center'}       
-              bg='rgba(196, 196, 196, 0.6)'         
-              >
-              <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-                <Stack align={'center'}>
-                  <Heading fontSize={'4xl'}>Something about you</Heading>                
-                </Stack>
-                <Box
-                  rounded={'lg'}
-                  bg={'white'}
-                  boxShadow={'lg'}
-                  p={8}>
-                  <Stack spacing={4}>
+    const language = this.context;
 
-                    <HStack spacing={2}>
-                      <FormControl id="age" maxWidth="20" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
-                        <FormLabel>Age</FormLabel>
-                        <NumberInput max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
-                      </FormControl>
-                      
-                      <FormControl id="gender" maxWidth="80" isRequired isInvalid={this.state.gender == '' && this.state.submitted == true}>
-                        <FormLabel>Gender</FormLabel>
-                        <Select placeholder="Select Gender" onBlur={this.genderInput}>
-                          <option key={'M'}>Male</option>
-                          <option key={'F'}>Female</option>
-                          <option key={'Other'}>Other</option>
-                        </Select>
-                      </FormControl>
-                    </HStack>
-                    <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
-                        <FormLabel>Locality</FormLabel>
-                        <Select placeholder="Select locality" onBlur={this.localityInput}>
-                          {this.state.localities.map
-                          (locality => <option key={locality}>{locality}</option>)
-                          }                         
-                        </Select>
-                      </FormControl>
-                    <ReCAPTCHA
-                      sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
-                      onChange={this.onValid}
-                    />
-                    
-                    <Stack spacing={10}>                    
-                      <Button
-                        isDisabled={!this.state.captchaVerified}
-                        onClick={this.submit}
-                        bg={'auburn.400'}
-                        color={'white'}
-                        _hover={{
-                          bg: 'auburn.500',
-                        }}>
-                        Sign in
-                      </Button>
-                    </Stack>
-                  </Stack>
-                </Box>
+    return (  
+      <>
+      <CustomToast ref={this.CustomToastElement} />
+
+        {this.state.hideLogin ? <></> :
+          <Flex
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}       
+            bg='rgba(196, 196, 196, 0.6)'         
+            >
+            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+              <Stack align={'center'}>
+                <Heading fontSize={'4xl'}>{language.Login.Title}</Heading>                
               </Stack>
-            </Flex>
-            }
-          </>
-        );
+              <Box
+                rounded={'lg'}
+                bg={'white'}
+                boxShadow={'lg'}
+                p={8}>
+                <Stack spacing={4}>
+
+                  <HStack spacing={2}>
+                    <FormControl id="age" maxWidth="20" isRequired isInvalid={this.state.age == '' && this.state.submitted == true}>
+                      <FormLabel>{language.Login.Age}</FormLabel>
+                      <NumberInput max={120} onBlur={this.ageInput} clampValueOnBlur={true}><NumberInputField /></NumberInput>
+                    </FormControl>
+                    
+                    <FormControl id="gender" maxWidth="80" isRequired isInvalid={this.state.gender == '' && this.state.submitted == true}>
+                      <FormLabel>{language.Login.Gender.Title}</FormLabel>
+                      <Select placeholder={language.Login.Gender.Placeholder} onBlur={this.genderInput}>
+                        <option key={'M'}>{language.Login.Gender.Male}</option>
+                        <option key={'F'}>{language.Login.Gender.Female}</option>
+                        <option key={'Other'}>{language.Login.Gender.Other}</option>
+                      </Select>
+                    </FormControl>
+                  </HStack>
+                  <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
+                      <FormLabel>Locality</FormLabel>
+                      <Select placeholder="Select locality" onBlur={this.localityInput}>
+                        {this.state.localities.map
+                        (locality => <option key={locality}>{locality}</option>)
+                        }                         
+                      </Select>
+                    </FormControl>
+                  <ReCAPTCHA
+                    sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
+                    onChange={this.onValid}
+                  />
+                  
+                  <Stack spacing={10}>                    
+                    <Button
+                      isDisabled={!this.state.captchaVerified}
+                      onClick={this.submit}
+                      bg={'auburn.400'}
+                      color={'white'}
+                      _hover={{
+                        bg: 'auburn.500',
+                      }}>
+                      Sign in
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Stack>
+          </Flex>
+          }
+        </>
+      );
   }
 }

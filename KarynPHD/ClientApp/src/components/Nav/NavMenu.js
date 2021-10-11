@@ -22,6 +22,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Stepper from './Stepper'
 import { BiLogOut } from 'react-icons/bi';
+import LanguageContext from '../../languages/LanguageContext';
 
 const NavLink = ({ children }) => (
   <Link
@@ -60,8 +61,8 @@ export default function NavMenu(props) {
             <Flex alignItems={'center'} display={{ base: 'none', md: 'flex' }}>
 
               <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
-                <Button variant="solid" mr="-px">En</Button>
-                <Button variant="outline" mr="-px">Mt</Button>
+                <Button onClick={() => props.onLanguageChange("en")} variant={props.isEnglish() ? "solid" : "outline"} mr="-px">En</Button>
+                <Button onClick={() => props.onLanguageChange("mt")} variant={!props.isEnglish() ? "solid" : "outline"} mr="-px">Mt</Button>
               </ButtonGroup>
 
             </Flex>
@@ -73,8 +74,8 @@ export default function NavMenu(props) {
               <Stepper currentCompletion={props.currentCompletion}></Stepper>
             </Stack>
             <ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
-              <Button variant="solid" mr="-px">En</Button>
-              <Button variant="outline" mr="-px">Mt</Button>
+              <Button onClick={() => props.onLanguageChange("en")} variant={props.isEnglish() ? "solid" : "outline"} mr="-px">En</Button>
+              <Button onClick={() => props.onLanguageChange("mt")} variant={!props.isEnglish() ? "solid" : "outline"} mr="-px">Mt</Button>
             </ButtonGroup>
           </Box>
         ) : null}

@@ -10,9 +10,10 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import { data } from "jquery";
 import Cookies from 'universal-cookie';
+import LanguageContext from "../../languages/LanguageContext";
 
 export default class NoteInput extends Component {
-
+  static contextType = LanguageContext;
   constructor(props) {
     super(props);
     this.state = { 
@@ -78,6 +79,7 @@ export default class NoteInput extends Component {
   }
 
  render(){
+    const language = this.context;
     return (
       <>
         <Box
@@ -94,7 +96,7 @@ export default class NoteInput extends Component {
         >
           <Flex justifyContent="space-between" alignItems="center">
             <chakra.span pl={4} fontSize="md" color={"gray.700"}>
-              Submit an idea
+              {language.Noteboard.NoteInput.Title}
             </chakra.span>
             {this.state.noteHasAlreadyBeenEntered ?
             <CloseButton onClick={this.props.toggleNoteInputDisplay}></CloseButton> : <></> }        
@@ -106,7 +108,7 @@ export default class NoteInput extends Component {
               size="md"
               resize={"none"}
               onBlur={this.handleChange}
-              placeholder="Enter Text Here (280 Characters)"
+              placeholder={language.Noteboard.NoteInput.Placeholder}
               isInvalid={this.state.isInvalid}
             />
           </Box>

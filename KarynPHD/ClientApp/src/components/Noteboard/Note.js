@@ -13,9 +13,10 @@ import { CheckIcon } from "@chakra-ui/icons";
 import { data } from "jquery";
 import { BsHeart, BsFillHeartFill } from 'react-icons/bs';
 import Cookies from 'universal-cookie';
+import LanguageContext from "../../languages/LanguageContext";
 
 export default class Note extends Component {
-
+  static contextType = LanguageContext;
   constructor(props) {
     super(props);
     this.state = { 
@@ -115,6 +116,7 @@ export default class Note extends Component {
  }
 
  render(){
+    const language = this.context;
     return (
       <>
         <Box
@@ -132,7 +134,7 @@ export default class Note extends Component {
           <Flex justifyContent="space-between" alignItems="self-end">
             <HStack>
                 <chakra.span fontSize="lg" color="#a63a3c">
-                    <Tooltip label={this.isNoteAlreadyLiked() ? "Remove heart" : "Leave a heart"}>
+                    <Tooltip label={this.isNoteAlreadyLiked() ? language.Noteboard.Note.UnlikeTooltip: language.Noteboard.Note.LikeTooltip}>
 
                         {this.isNoteAlreadyLiked() ? 
                           <button onClick={this.unlikeNote}><BsFillHeartFill></BsFillHeartFill></button>
