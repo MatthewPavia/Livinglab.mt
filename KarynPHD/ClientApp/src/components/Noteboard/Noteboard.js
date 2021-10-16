@@ -148,24 +148,26 @@ export default class Noteboard extends Component {
                             {language.Noteboard.Add}
                             </Button>
 
+                            {!this.props.isCompleted ?
                             <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label={language.Noteboard.NextTooltip}>
                                 <span>
                                 <Button display={{md:"flex",base:"none"}} onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
                                 </span>
-                            </Tooltip>     
+                            </Tooltip> : <></>}
                         </HStack>
 
                         {/*Displayed for mobile only */}
                         <HStack display={{md:"none",base:"flex"}} justify="center">
                             <Button pr={4} rightIcon={<AddIcon />} colorScheme="auburn" variant="outline" onClick={this.toggleNoteInputDisplay}>
-                            Add Idea
+                            {language.Noteboard.Add}
                             </Button>
 
-                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label="Please leave a note to proceed.">
+                            {!this.props.isCompleted ?
+                            <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label={language.Noteboard.NextTooltip}>
                                 <span>
-                                <Button onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                                <Button onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
                                 </span>
-                            </Tooltip>  
+                            </Tooltip> : <></>}
                         </HStack>
 
                         <Select p={2} pl={5} onChange={this.changeSorting} maxWidth={{lg:"6%",md:"12%",base:"29%"}} size={{md:"sm",base:"sm"}} placeholder="Sort By">

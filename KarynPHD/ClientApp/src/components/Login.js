@@ -188,8 +188,8 @@ export class Login extends Component {
                     </FormControl>
                   </HStack>
                   <FormControl id="locality" isRequired isInvalid={this.state.locality == '' && this.state.submitted == true}>
-                      <FormLabel>Locality</FormLabel>
-                      <Select placeholder="Select locality" onBlur={this.localityInput}>
+                      <FormLabel>{language.Login.Locality.Title}</FormLabel>
+                      <Select placeholder={language.Login.Locality.Placeholder} onBlur={this.localityInput}>
                         {this.state.localities.map
                         (locality => <option key={locality}>{locality}</option>)
                         }                         
