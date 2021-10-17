@@ -6,13 +6,14 @@ import Noteboard from './Noteboard/Noteboard';
 import { Footer } from './Nav/Footer';
 import {SolutionSpace} from './SolutionSpace/SolutionSpace'
 import Cookies from 'universal-cookie';
+import { IssueSpace } from './Issues/IssueSpace';
 
 export class Main extends Component {
     constructor(props) {
         super(props);
 
         this.state = { 
-          currentCompletion:1
+          currentCompletion:0
         };         
         this.pageToDisplay = this.pageToDisplay.bind(this);
         this.completePage = this.completePage.bind(this);
@@ -46,7 +47,7 @@ export class Main extends Component {
 
     pageToDisplay(){
         if(this.state.currentCompletion == 0){
-            return(<></>)
+            return(<IssueSpace completePage={this.completePage}></IssueSpace>)
         }
         else if(this.state.currentCompletion == 1){
             return(<Noteboard isCompleted={false} completePage={this.completePage}></Noteboard>)
