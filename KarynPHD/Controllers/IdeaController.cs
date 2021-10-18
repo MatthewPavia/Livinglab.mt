@@ -13,9 +13,9 @@ namespace KarynPHD.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class NoteController : Controller
+    public class IdeaController : Controller
     {
-        public NoteController(IConfiguration configuration)
+        public IdeaController(IConfiguration configuration)
         {
             Configuration = configuration;
         }

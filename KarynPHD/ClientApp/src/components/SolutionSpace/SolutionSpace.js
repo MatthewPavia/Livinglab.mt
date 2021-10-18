@@ -36,7 +36,8 @@ export class SolutionSpace extends Component {
 
     Swal(){
         Swal.fire({
-            title: 'Thank you for your participation! Feel free to continue participating in the idea board!',
+            title: 'Thank you for your participation!',
+            text:"Please consider also participating in my questionairre: googl.forms/skdfjaksd",
             icon:'success',
             width: 600,
             padding: '3em',
@@ -136,7 +137,7 @@ export class SolutionSpace extends Component {
             <Box>
                 <HStack spacing={0} p={4} >
                     <Box>
-                        <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5}>Solution Space</Heading>
+                        <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Solution Space</Heading>
                         <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>Tell us what you think about these proposed solutions</Text>
                     </Box>
                 </HStack>

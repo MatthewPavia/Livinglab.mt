@@ -65,7 +65,7 @@ export default class NoteInput extends Component {
     }
     else{
       this.setState({isInvalid:false})
-      fetch('note', {
+      fetch('idea', {
         method:'POST',
         body:JSON.stringify({"Text":this.state.inputText.trim(),"PostedBy":cookies.get('username')}), 
         headers: {

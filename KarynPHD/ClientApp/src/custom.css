@@ -42,10 +42,18 @@ code {
   }
 }
 
+.issueBox:hover {
+  filter: brightness(75%);
+}
+
 .emojiButton:hover {
-  filter: brightness(45%);
+  filter: brightness(55%);
 }
 
 .emojiButton:active {
   filter: brightness(45%);
+}
+
+.swal2-container {
+  z-index: 2000;
 }

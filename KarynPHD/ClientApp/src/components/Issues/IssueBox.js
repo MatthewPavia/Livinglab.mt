@@ -8,8 +8,8 @@ export class IssueBox extends Component {
           value:0,
           colours:{
               0:"#b3b3b3",
-              1:"#d05353",
-              2:"#FED766",
+              1:"#DB5461",
+              2:"#F58F29",
               3:"#52AA5E"
           }
         };         
@@ -36,7 +36,9 @@ export class IssueBox extends Component {
             maxW={'100%'}
             value={this.state.value}
             onClick={()=>this.incrementValue()}
-            cursor="pointer"><Text fontSize="lg" unselectable="on" userSelect="none">{this.props.text}</Text></Box>
+            textAlign="center"
+            className="issueBox"
+            cursor="pointer"><Text fontSize="xl" unselectable="on" userSelect="none">{this.props.text}</Text></Box>
         )
     }
 
