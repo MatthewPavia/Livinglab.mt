@@ -3,6 +3,7 @@ using Azure.Data.Tables;
 using KarynPHD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace KarynPHD.Controllers
     public class SolutionController : Controller
     {
 
-        public SolutionController(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public SolutionController(IConfiguration configuration, ILogger<SolutionController> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
         public IConfiguration Configuration { get; }
 
@@ -59,11 +62,12 @@ namespace KarynPHD.Controllers
                     solutions.Add(solution);
                 }
 
-
+                _logger.LogInformation("Solution - Get");
                 return Ok(solutions.OrderBy(x => x.Number));
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Solution - Get");
                 return StatusCode(500);
             }
         }
@@ -102,10 +106,12 @@ namespace KarynPHD.Controllers
                     i++;
                 }
 
+                _logger.LogInformation("Solution - Post");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Solution - Post");
                 return StatusCode(500);
             }
         }

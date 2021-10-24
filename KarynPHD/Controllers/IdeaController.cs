@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace KarynPHD.Controllers
 {
@@ -15,9 +16,12 @@ namespace KarynPHD.Controllers
     [Route("[controller]")]
     public class IdeaController : Controller
     {
-        public IdeaController(IConfiguration configuration)
+        private readonly ILogger _logger;
+
+        public IdeaController(IConfiguration configuration, ILogger<IdeaController> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
         public IConfiguration Configuration { get; }
 
@@ -38,15 +42,17 @@ namespace KarynPHD.Controllers
                     { "Text", note.Text },
                     { "Likes", 0 },
                     { "PostedBy", note.PostedBy },
-                    { "Created",  DateTime.Now.ToString()}
+                    { "Created",  DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}
                 };
 
                 tableClient.AddEntity(entity);
 
+                _logger.LogInformation("Idea - Post");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Idea - Post");
                 return StatusCode(500);
             }
         }
@@ -76,7 +82,7 @@ namespace KarynPHD.Controllers
                         Id = qEntity.RowKey,
                         Text = qEntity.GetString("Text"),
                         Likes = qEntity.GetInt32("Likes"),
-                        Created = Convert.ToDateTime(qEntity.GetString("Created")),
+                        Created = DateTime.ParseExact(qEntity.GetString("Created"),"dd/MM/yyyy HH:mm:ss",null),
                         timestamp = qEntity.Timestamp
                     };
 
@@ -87,10 +93,13 @@ namespace KarynPHD.Controllers
                 {
                     return Ok(notes.OrderByDescending(x => x.Likes).ToList());
                 }
+
+                _logger.LogInformation("Idea - Get");
                 return Ok(notes.OrderByDescending(x => x.Created).ToList());
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Idea - Get");
                 return StatusCode(500);
             }
         }
@@ -122,10 +131,12 @@ namespace KarynPHD.Controllers
 
                 tableClient.UpdateEntity(updatedEntity, ETag.All, TableUpdateMode.Replace);
 
+                _logger.LogInformation("Idea - AddLike");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Idea - AddLike");
                 return StatusCode(500);
             }
         }
@@ -157,10 +168,12 @@ namespace KarynPHD.Controllers
 
                 tableClient.UpdateEntity(updatedEntity, ETag.All, TableUpdateMode.Replace);
 
+                _logger.LogInformation("Idea - RemoveLike");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at Idea - RemoveLike");
                 return StatusCode(500);
             }
         }

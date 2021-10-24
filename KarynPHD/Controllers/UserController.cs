@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Logging;
 
 namespace KarynPHD.Controllers
 {
@@ -14,9 +15,11 @@ namespace KarynPHD.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        public UserController(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public UserController(IConfiguration configuration, ILogger<UserController> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
         public IConfiguration Configuration { get; }
 
@@ -42,10 +45,12 @@ namespace KarynPHD.Controllers
 
                 tableClient.AddEntity(entity);
 
+                _logger.LogInformation("User - Post");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Exception at User - Post");
                 return StatusCode(500);
             }
             

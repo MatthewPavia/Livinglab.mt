@@ -3,6 +3,7 @@ using KarynPHD.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,57 +17,68 @@ namespace KarynPHD.Controllers
     public class IssuesController : ControllerBase
     {
 
-        public IssuesController(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public IssuesController(IConfiguration configuration, ILogger<IssuesController> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
         public IConfiguration Configuration { get; }
 
         [HttpPost]
         public ActionResult Post(Issue issues)
         {
-            var configurationSection = Configuration.GetSection("AzureTable");
-            string uri = configurationSection.GetSection("Uri").Value;
-            string key = configurationSection.GetSection("Key").Value;
-            string account = configurationSection.GetSection("StorageAccountName").Value;
-
-            var tableClient = new TableClient(new Uri(uri), "Issues", new TableSharedKeyCredential(account, key));
-
-            int i = 0;
-
-            foreach (var ans in issues.Answers)
+            try
             {
-                string answer = "";
+                var configurationSection = Configuration.GetSection("AzureTable");
+                string uri = configurationSection.GetSection("Uri").Value;
+                string key = configurationSection.GetSection("Key").Value;
+                string account = configurationSection.GetSection("StorageAccountName").Value;
 
-                switch (ans)
+                var tableClient = new TableClient(new Uri(uri), "Issues", new TableSharedKeyCredential(account, key));
+
+                int i = 0;
+
+                foreach (var ans in issues.Answers)
                 {
-                    case "1":
-                        answer = "Major issue";
-                        break;
-                    case "2":
-                        answer = "Somewhat of an issue";
-                        break;
-                    case "3":
-                        answer = "Not an issue";
-                        break;
-                    default:
-                        answer = ans;
-                        break;
-                }
+                    string answer = "";
 
-                var entity = new TableEntity("Issue", Guid.NewGuid().ToString())
+                    switch (ans)
+                    {
+                        case "1":
+                            answer = "Major issue";
+                            break;
+                        case "2":
+                            answer = "Somewhat of an issue";
+                            break;
+                        case "3":
+                            answer = "Not an issue";
+                            break;
+                        default:
+                            answer = ans;
+                            break;
+                    }
+
+                    var entity = new TableEntity("Issue", Guid.NewGuid().ToString())
                     {
                         { "Question", issues.Questions[i] },
                         { "Answer", answer },
                         { "PostedBy", issues.PostedBy }
                     };
 
-                tableClient.AddEntity(entity);
+                    tableClient.AddEntity(entity);
 
-                i++;
+                    i++;
+                }
+
+                _logger.LogInformation("Issues - Post");
+                return Ok();
             }
-
-            return Ok();
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception at Issues - Post");
+                return StatusCode(500);
+            }
         }
     }
 }
