@@ -52,10 +52,6 @@ export class SolutionBox extends Component {
     }
 
     isSolutionFilled(){
-        console.log(this.props.answers[this.props.currentSolution]['rating'])
-        console.log(this.props.answers[this.props.currentSolution]['opinion'])
-        console.log(this.props.answers[this.props.currentSolution]['encouraged'])
-
         if(this.props.answers[this.props.currentSolution]['rating'] != "" && this.props.answers[this.props.currentSolution]['opinion'] != "" && this.props.answers[this.props.currentSolution]['encouraged'] != ""){
             return true
         }
@@ -65,17 +61,13 @@ export class SolutionBox extends Component {
     render(){
         return(
             <>
-            <HStack p={2} display={{md:"none",base:"flex"}} justify="space-evenly">
-                <IconButton onClick={this.props.decrementCurrentSolution} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
-                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={!this.isSolutionFilled()} colorScheme="eucalyptus" mr={4} icon={this.isFinalSolutionBox()?<CheckIcon/>:<ArrowForwardIcon/>}/>
-            </HStack>
+            
             <Center py={6}>
                 <Tooltip label="Previous solution" isDisabled={this.props.currentSolution==1}>
                     <IconButton onClick={this.props.decrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
                 </Tooltip>
 
-                <Box maxW={{md:'80%',base:'95%'}} w={'full'} bg={'white'} boxShadow={'2xl'} rounded={'md'} p={6} overflow={'hidden'}>         
-
+                <Box maxW={{md:'80%',base:'95%'}} w={'full'} bg={'white'} boxShadow={{md:'2xl',base:'md'}} rounded={'md'} p={6} overflow={'hidden'}>         
                     <VStack spacing={2}> 
                         <Stack>
                             <HStack spacing={2}>                       
@@ -126,6 +118,11 @@ export class SolutionBox extends Component {
                     <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={!this.isSolutionFilled()} size="lg" display={{md:"block",base:"none"}} colorScheme="eucalyptus" ml={4} icon={this.isFinalSolutionBox()?<CheckIcon/>:<ArrowForwardIcon/>}/>
                 </Tooltip>
             </Center>
+
+            <HStack p={2} pb={4} display={{md:"none",base:"flex"}} justify="space-evenly">
+                <IconButton onClick={this.props.decrementCurrentSolution} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
+                <IconButton onClick={this.props.incrementCurrentSolution} isDisabled={!this.isSolutionFilled()} colorScheme="eucalyptus" mr={4} icon={this.isFinalSolutionBox()?<CheckIcon/>:<ArrowForwardIcon/>}/>
+            </HStack>
             </>
         )
     }

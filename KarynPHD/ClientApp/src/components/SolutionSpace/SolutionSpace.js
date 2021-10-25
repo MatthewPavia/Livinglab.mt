@@ -106,6 +106,7 @@ export class SolutionSpace extends Component {
             }       
         }
         else{
+            window.scrollTo({top:0, behavior:"smooth"})
             let newCurrentSolution = this.state.currentSolution + 1
             this.setState({currentSolution:newCurrentSolution}, ()=> this.getCurrentSolutionDetails())
         }     

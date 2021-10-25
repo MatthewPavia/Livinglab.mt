@@ -73,12 +73,6 @@ export class IssueSpace extends Component {
                     </Tooltip>
                     
                 </HStack>
-
-                <Tooltip display={{md:"none",base:"flex"}} isDisabled={this.allAnswered()} label="Please answer all questions to proceed">
-                    <span>
-                    <Button ml={9} display={{md:"none",base:"flex"}} onClick={this.submit} isDisabled={!this.allAnswered()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
-                    </span>
-                </Tooltip>
             </Box>
 
             <SimpleGrid columns={{lg:3,md:2,base:1}} spacing={5} p={4}>
@@ -98,8 +92,16 @@ export class IssueSpace extends Component {
                     <FormLabel fontSize={{md:"xl",base:"md"}}>Do you experience any other problems related to transport in your locality?</FormLabel>
                     <Textarea isRequired value={this.state.answers[13]} justify="center" id={13} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
                 </FormControl>
+
+                <Tooltip display={{md:"none",base:"flex"}} isDisabled={this.allAnswered()} label="Please answer all questions to proceed">
+                    <span>
+                    <Button width="100%" display={{md:"none",base:"flex"}} onClick={this.submit} isDisabled={!this.allAnswered()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                    </span>
+                </Tooltip>
             </Stack>
             
+            
+
             </>
         )
     }

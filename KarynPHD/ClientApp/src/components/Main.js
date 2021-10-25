@@ -7,6 +7,8 @@ import { Footer } from './Nav/Footer';
 import {SolutionSpace} from './SolutionSpace/SolutionSpace'
 import Cookies from 'universal-cookie';
 import { IssueSpace } from './Issues/IssueSpace';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 export class Main extends Component {
     constructor(props) {
@@ -18,6 +20,8 @@ export class Main extends Component {
         this.pageToDisplay = this.pageToDisplay.bind(this);
         this.completePage = this.completePage.bind(this);
     }
+
+    dismissAllToasts = () =>  toast.dismiss();
 
     componentDidMount(){
         const cookies = new Cookies();
@@ -43,6 +47,8 @@ export class Main extends Component {
 
         const cookies = new Cookies();
         this.setState({currentCompletion:current},()=>this.setCompletionCookie(cookies))
+
+        this.dismissAllToasts()
     }
 
     pageToDisplay(){

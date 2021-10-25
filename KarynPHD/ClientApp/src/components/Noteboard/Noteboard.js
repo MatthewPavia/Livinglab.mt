@@ -185,7 +185,7 @@ export default class Noteboard extends Component {
                     {this.state.displayInput ?
                     <> 
                     <Box position="fixed" width='100%' height='100%' bg='rgba(196, 196, 196, 0.6)' zIndex={5}></Box>
-                    <Box position='fixed' width='100%' height='100%' left={0} top={300} zIndex={10}>
+                    <Box position='fixed' width='100%' height='100%' left={0} top={{md:300,sm:200,base:150}} zIndex={10}>
                         <NoteInput ideaSubmitted={this.ideaSubmitted} completePage={this.props.completePage} toggleNoteInputDisplay={this.toggleNoteInputDisplay} refreshBoard={this.fetchNoteData}/>
                     </Box></> : <></>  }
                                                          

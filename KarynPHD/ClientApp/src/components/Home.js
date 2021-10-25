@@ -47,7 +47,7 @@ export class Home extends Component {
                   bg: 'auburn.400',
                   zIndex: -1,
                 }}>
-                MobilitAzzjoni
+                IdeaLab.mt
               </Text>
               <br />{' '}         
             </Heading>
