@@ -52,13 +52,28 @@ export default class Note extends Component {
  likeNote(){
     fetch('idea/AddLike/'+this.props.id,
     {"method":"POST", "headers": {'Content-Type': 'application/json'}})
-    .then(this.props.refreshBoard).then(this.updateLikedNoteList)
+    .then(res =>{ 
+      if(res.ok){ 
+        this.props.refreshBoard() 
+      } 
+      else{
+        alert("An error has occurred. Please try again.")
+      }
+    }).then(this.updateLikedNoteList)
  }
 
  unlikeNote(){
   fetch('idea/RemoveLike/'+this.props.id,
   {"method":"POST", "headers": {'Content-Type': 'application/json'}})
-  .then(this.props.refreshBoard).then(this.removeFromLikedNoteList).then(this.isNoteAlreadyLiked)
+  .then(res => { 
+    if(res.ok){
+      this.props.refreshBoard()
+    }
+    else{
+      alert("An error has occurred. Please try again.")
+    } 
+  }).then(this.removeFromLikedNoteList)
+  .then(this.isNoteAlreadyLiked)
 }
   
  updateLikedNoteList(){

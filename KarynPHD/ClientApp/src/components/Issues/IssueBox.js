@@ -38,7 +38,7 @@ export class IssueBox extends Component {
             onClick={()=>this.incrementValue()}
             textAlign="center"
             className="issueBox"
-            cursor="pointer"><Text fontSize="xl" unselectable="on" userSelect="none">{this.props.text}</Text></Box>
+            cursor="pointer"><Text fontSize={{lg:"xl",md:"lg",base:"md"}} unselectable="on" userSelect="none">{this.props.text}</Text></Box>
         )
     }
 

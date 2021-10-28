@@ -36,7 +36,18 @@ export default class Noteboard extends Component {
     }
 
     fetchNoteData(){
-        fetch('idea/Get/'+this.state.sorting, {"method":"GET"}).then(res => res.json()).then(data => this.setState({notes:data}))   
+        fetch('idea/Get/'+this.state.sorting, {"method":"GET"})
+        .then(res => { 
+            if(res.ok){
+                return res.json()
+            }
+            else{
+                if(window.confirm("An error has occurred. Please try again.")){
+                    window.location.reload()
+                }
+            }
+        })
+        .then(data => this.setState({notes:data}))   
     }
 
     disableScrolling(){

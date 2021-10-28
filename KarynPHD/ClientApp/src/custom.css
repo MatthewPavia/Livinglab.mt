@@ -55,6 +55,5 @@ code {
 }
 
 .swal2-container {
-  position: relative;
   z-index: 20000;
 }

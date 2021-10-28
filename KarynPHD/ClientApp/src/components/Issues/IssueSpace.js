@@ -31,7 +31,14 @@ export class IssueSpace extends Component {
             body:JSON.stringify({"Questions":questions,"Answers":this.state.answers,"PostedBy":cookies.get('username')}),
             headers:{'Content-Type': 'application/json'} 
             })
-        .then(this.props.completePage())
+        .then(res => {
+            if(res.ok){
+                this.props.completePage()
+            }
+            else{
+                alert("An error has occurred. Please try again.")
+            }
+        })
     }
 
     setAnswer(i,value){

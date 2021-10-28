@@ -58,7 +58,16 @@ export class SolutionSpace extends Component {
 
     componentDidMount(){
         fetch('solution', {"method":"GET"})
-        .then(res => res.json())
+        .then(res =>{
+            if(res.ok){
+                return res.json()
+            }
+            else{
+                if(window.confirm("An error has occurred. Please try again.")){
+                    window.location.reload()
+                }
+            }
+        })
         .then(data => this.setState({solutions:data},() => this.getCurrentSolutionDetails()))
     }
 
@@ -93,13 +102,23 @@ export class SolutionSpace extends Component {
         if(this.state.currentSolution == this.state.totalSolutions){
             if(this.allAnswered()){
                 const cookies = new Cookies();
+
                 fetch('solution',{
-                    method:'POST',
-                    body:JSON.stringify({"Answers":this.state.answers,"PostedBy":cookies.get('username')}),
-                    headers:{'Content-Type': 'application/json'} 
+                        method:'POST',
+                        body:JSON.stringify({"Answers":this.state.answers,"PostedBy":cookies.get('username')}),
+                        headers:{'Content-Type': 'application/json'} 
                     })
-                .then(res => this.Swal())
-                .then(this.setCompletionCookie())
+                .then(res => { 
+                    if(res.ok){
+                        return this.Swal()
+                    }
+                    else{
+                        return Promise.reject(res);
+                    }
+                })
+                .then(val => this.setCompletionCookie())
+                .catch(error => alert("An error has occurred. Please try again."))
+
             }
             else{
                 this.CustomToastElement.current.toastError('Please fill in all questions!')
