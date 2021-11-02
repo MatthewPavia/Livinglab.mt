@@ -146,8 +146,7 @@ export default class Noteboard extends Component {
             <>
                 <CustomToast ref={this.CustomToastElement} />
 
-                <Box width='100%' height='100%' position='relative' >
-                    <Box position='absolute' width='100%' height='100%'>
+                <Box width='100%' height='100%' position="relative" >
                         <HStack spacing={4} p={4} justify="space-between">
                             <Box>
                                 <Heading fontSize={{md:"3xl", sm:"2xl"}} pl={5} >{language.Noteboard.Title}</Heading>
@@ -191,19 +190,16 @@ export default class Noteboard extends Component {
                         
 
                         {this.displayNotes()}
-                    </Box> 
                    
                     {this.state.displayInput ?
                     <> 
-                    <Box position="fixed" width='100%' height='100%' bg='rgba(196, 196, 196, 0.6)' zIndex={5}></Box>
+                    <Box position="absolute" bottom={0} top={0} width='100%' height='100%' backgroundColor='rgba(196, 196, 196, 0.6)' zIndex={5}></Box>
                     <Box position='fixed' width='100%' height='100%' left={0} top={{md:300,sm:200,base:150}} zIndex={10}>
                         <NoteInput ideaSubmitted={this.ideaSubmitted} completePage={this.props.completePage} toggleNoteInputDisplay={this.toggleNoteInputDisplay} refreshBoard={this.fetchNoteData}/>
                     </Box></> : <></>  }
                                                          
-                   <Box position="fixed" width="100%" bottom={0}>
-                       
-                    </Box>
-                </Box>                
+                </Box>   
+                            
             </>                  
         )    
     }

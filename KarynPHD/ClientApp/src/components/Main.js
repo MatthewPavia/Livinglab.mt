@@ -70,14 +70,15 @@ export class Main extends Component {
         return(
             <>  
                 <Box width='100%' height='100%' position='relative'>
-                    <NavMenu onLanguageChange={this.props.onLanguageChange} isEnglish={this.props.isEnglish} currentCompletion={this.state.currentCompletion}></NavMenu>    
+                    <NavMenu onLanguageChange={this.props.onLanguageChange} isEnglish={this.props.isEnglish} currentCompletion={this.state.currentCompletion} isCompleted={this.state.currentCompletion >= 3}></NavMenu>    
                     {!this.props.isAuth ? 
                     <Box position='absolute' width='100%' height='100%' zIndex='10'>
                         <Login></Login>
                     </Box>
-                    : <></>}            
+                    : <></>}      
                 </Box>
-                {this.pageToDisplay()}         
+                {this.pageToDisplay()}          
+                <Footer></Footer>              
             </>
         )
     }

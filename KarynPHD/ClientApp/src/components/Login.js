@@ -209,7 +209,7 @@ export class Login extends Component {
                       _hover={{
                         bg: 'auburn.500',
                       }}>
-                      Sign in
+                      Start
                     </Button>
                   </Stack>
                 </Stack>
