@@ -92,7 +92,7 @@ export default function NavMenu(props) {
               <Button onClick={() => props.onLanguageChange("mt")} variant={!props.isEnglish() ? "solid" : "outline"} mr="-px">Mt</Button>
             </ButtonGroup>*/}
 
-            {!props.isCompleted ? 
+            {props.isCompleted ? 
               <Button onClick={() => clearCookies()} size="sm" colorScheme="eucalyptus" variant="outline">Leave Lab</Button> : <></>}
 
           </Box>

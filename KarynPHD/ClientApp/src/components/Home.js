@@ -11,6 +11,8 @@ import {
 import en from '../languages/en.json'
 import mt from '../languages/mt.json'
 import LanguageContext from '../languages/LanguageContext';
+import Cookies from 'universal-cookie';
+import { Redirect } from 'react-router-dom';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -26,10 +28,23 @@ export class Home extends Component {
     this.props.history.push('/main')
   }
 
+  isAuth(){
+    const cookies = new Cookies();
+    if(cookies.get('username') !== undefined){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   render () {
     const language = this.context;
 
     return (
+
+      this.isAuth() ? <Redirect to="/main"></Redirect> : 
+
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} bg='eucalyptus.100' position={'relative'} style={{zIndex:1}}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={6} w={'full'} maxW={'lg'}>

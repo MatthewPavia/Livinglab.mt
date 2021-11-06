@@ -7,7 +7,8 @@ import { Login } from './components/Login';
 import {SolutionSpace} from './components/SolutionSpace/SolutionSpace'
 import LanguageContext from './languages/LanguageContext';
 import { EN, MT } from "./languages/language";
-
+import { TermsOfUse } from './components/Info/TermsOfUse';
+import { PrivacyPolicy } from './components/Info/PrivacyPolicy';
 import './custom.css'
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router-dom';
@@ -68,21 +69,30 @@ export default class App extends Component {
       return false
     }
   }
+  
+  RequireAuth(children) {
+    let auth = this.isAuth();
+  
+    if (!auth) {
+      // Redirect them to the /login page, but save the current location they were
+      // trying to go to when they were redirected. This allows us to send them
+      // along to that page after they login, which is a nicer user experience
+      // than dropping them off on the home page.
+      return <Redirect to="/" />;
+    }
+  
+    return children;
+  }
 
   render () {
-    this.isAuth()
     return (
       <>
       <LanguageContext.Provider value={this.state.language}>
         <Layout>
           <Route exact path='/' component={Home} />
-          <Route path='/main' render={(props) => (<Main {...props} isAuth={this.isAuth()} isEnglish={this.isEnglish} onLanguageChange={this.onLanguageChange} />)} />
-          <>
-            {this.isAuth() ? 
-              <Redirect to='/main'></Redirect>
-              : <Redirect to='/'></Redirect>
-            }
-          </>
+          <Route path='/terms' component={TermsOfUse} />
+          <Route path='/privacypolicy' component={PrivacyPolicy} />
+          <Route path='/main' render={(props) => ( <Main {...props} isAuth={this.isAuth()} isEnglish={this.isEnglish} onLanguageChange={this.onLanguageChange} />)} />
         </Layout>
       </LanguageContext.Provider>
       </>
