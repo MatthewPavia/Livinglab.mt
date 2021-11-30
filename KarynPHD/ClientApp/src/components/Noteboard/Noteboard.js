@@ -1,4 +1,4 @@
-import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStack, SimpleGrid, Container, Text, IconButton, Tooltip, Stack  } from "@chakra-ui/react";
+import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStack, SimpleGrid, Container, Text, IconButton, Tooltip, Stack, Spinner  } from "@chakra-ui/react";
 import React, { Component } from "react";
 import NoteInput from "./NoteInput";
 import Note from "./Note";
@@ -189,7 +189,9 @@ export default class Noteboard extends Component {
 
                         
 
-                        {this.displayNotes()}
+                        {this.state.notes.length < 1 ? 
+                        <Spinner mt={12} mb={12} marginLeft="auto" marginRight="auto" thickness='4px' display="block" justify="space-between" size='xl' color="auburn.500" emptyColor='gray.200'></Spinner>
+                        : this.displayNotes()  }
                    
                     {this.state.displayInput ?
                     <> 

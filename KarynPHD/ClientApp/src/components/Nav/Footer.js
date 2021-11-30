@@ -30,7 +30,7 @@ export class Footer extends Component {
                     justify={{ base: 'center', md: 'space-between' }}
                     align="center">
 
-                    <Text fontSize={{md:"sm",base:"xs"}}>© {this.state.year} IdeaLab.mt all rights reserved. Website developed by Matthew Pavia.</Text>
+                    <Text fontSize={{md:"sm",base:"xs"}}>© {this.state.year} IdeaLab.mt all rights reserved.</Text>
                     <HStack pb={2} spacing={8}>
                         <Text fontSize={{md:"sm",base:"xs"}} fontWeight="semibold"><Link as={ReachLink} to="/terms" color="eucalyptus.700">Terms of Use</Link></Text>
                         <Text fontSize={{md:"sm",base:"xs"}} fontWeight="semibold"><Link as={ReachLink} to="/privacypolicy" color="eucalyptus.700">Privacy Policy</Link></Text>
