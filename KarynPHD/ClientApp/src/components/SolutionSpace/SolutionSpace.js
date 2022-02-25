@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import React, { Component } from "react";
 import {
     chakra,
@@ -32,28 +31,6 @@ export class SolutionSpace extends Component {
         this.getCurrentSolutionDetails = this.getCurrentSolutionDetails.bind(this)
         this.incrementCurrentSolution = this.incrementCurrentSolution.bind(this)
         this.decrementCurrentSolution = this.decrementCurrentSolution.bind(this)
-    }
-
-    Swal(){
-        Swal.fire({
-            title: 'Thank you for your participation!',
-            text:"Please consider also participating in my questionairre: googl.forms/skdfjaksd",
-            icon:'success',
-            width: 600,
-            padding: '3em',
-            background: '#fff',
-            backdrop: `
-              rgba(75,104,96,0.7)
-            `,
-            allowOutsideClick:false,
-            confirmButtonColor: '#b87160',
-            confirmButtonText: 'Complete'
-          }).then(result => {
-                if(result.isConfirmed){
-                    this.props.completePage()
-                }
-            }
-          )
     }
 
     componentDidMount(){
@@ -92,8 +69,6 @@ export class SolutionSpace extends Component {
 
         let validation = answers.every(x => x.rating && x.opinion && x.encouraged)
 
-        console.log(answers)
-
         return validation
     }
 
@@ -108,15 +83,8 @@ export class SolutionSpace extends Component {
                         body:JSON.stringify({"Answers":this.state.answers,"PostedBy":cookies.get('username')}),
                         headers:{'Content-Type': 'application/json'} 
                     })
-                .then(res => { 
-                    if(res.ok){
-                        return this.Swal()
-                    }
-                    else{
-                        return Promise.reject(res);
-                    }
-                })
                 .then(val => this.setCompletionCookie())
+                .then(val => this.props.completePage())
                 .catch(error => alert("An error has occurred. Please try again."))
 
             }
@@ -158,7 +126,7 @@ export class SolutionSpace extends Component {
                 <HStack spacing={0} p={4} >
                     <Box>
                         <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Solution Space</Heading>
-                        <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>Tell us what you think about these proposed solutions</Text>
+                        <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>What do you think about these proposed solutions?</Text>
                     </Box>
                 </HStack>
                 <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} description={this.state.currentSolutionDetails.description} 

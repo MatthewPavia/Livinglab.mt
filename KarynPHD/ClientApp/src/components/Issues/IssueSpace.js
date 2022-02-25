@@ -20,7 +20,6 @@ export class IssueSpace extends Component {
     }
 
     submit(){
-        console.log("heree")
         const cookies = new Cookies();
 
         let questions = this.state.issues

@@ -6,8 +6,8 @@ import LanguageContext from "../../languages/LanguageContext";
 
 const steps = [
   { label: 'Issues' },
-  { label: 'Ideas' },
   { label: 'Solutions' },
+  { label: 'Ideas' },
 ];
 
 export default function Stepper(props) {

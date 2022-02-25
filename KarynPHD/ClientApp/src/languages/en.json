@@ -30,8 +30,8 @@
         "Title":"Idea Board",
         "Description":"Think of a space or a street within your locality that you would like to see improved to encourage more people to walk rather than use their car. Add your ideas to the note board below and ‘heart’ ideas proposed by other users that you agree with.",
         "Add":"Add Idea",
-        "Next":"Next",
-        "NextTooltip":"Please leave a note to proceed.",
+        "Next":"Finish",
+        "NextTooltip":"Please add a note to proceed.",
         "Note":{
             "LikeTooltip":"Leave a heart",
             "UnlikeTooltip":"Remove heart"
@@ -44,6 +44,6 @@
     },
     "SolutionSpace":{
         "Title":"Solution Space",
-        "Description":"Tell us what you think about these proposed solutions."
+        "Description":"What do you think about these proposed solutions?"
     }
 }

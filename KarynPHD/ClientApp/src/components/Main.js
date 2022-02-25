@@ -56,10 +56,10 @@ export class Main extends Component {
             return(<IssueSpace completePage={this.completePage}></IssueSpace>)
         }
         else if(this.state.currentCompletion == 1){
-            return(<Noteboard isCompleted={false} completePage={this.completePage}></Noteboard>)
-        }
-        else if(this.state.currentCompletion == 2){
             return(<SolutionSpace completePage={this.completePage}></SolutionSpace>)
+        }
+        else if(this.state.currentCompletion == 2){        
+            return(<Noteboard isCompleted={false} completePage={this.completePage}></Noteboard>)
         }
         else if(this.state.currentCompletion >= 3){
             return(<Noteboard isCompleted={true} completePage={this.completePage}></Noteboard>)

@@ -24,6 +24,7 @@ import Stepper from './Stepper'
 import { BiLogOut } from 'react-icons/bi';
 import LanguageContext from '../../languages/LanguageContext';
 import Cookies from 'universal-cookie';
+import { Redirect } from 'react-router-dom';
 
 const NavLink = ({ children }) => (
   <Link
@@ -39,12 +40,16 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
+function leaveLab(){
+  this.clearCookies()
+  
+}
+
 function clearCookies(){
   const cookies = new Cookies();
   cookies.remove("username")
   cookies.remove("likes")
   cookies.remove("completion")
-
   window.location.reload()
 }
 
@@ -92,8 +97,9 @@ export default function NavMenu(props) {
               <Button onClick={() => props.onLanguageChange("mt")} variant={!props.isEnglish() ? "solid" : "outline"} mr="-px">Mt</Button>
             </ButtonGroup>*/}
 
-            {props.isCompleted ? 
-              <Button onClick={() => clearCookies()} size="sm" colorScheme="eucalyptus" variant="outline">Leave Lab</Button> : <></>}
+            {props.isCompleted ?
+                <Button onClick={() => leaveLab()} size="sm" colorScheme="eucalyptus" variant="outline">Leave Lab</Button>
+              : <></>}
 
           </Box>
         ) : null}

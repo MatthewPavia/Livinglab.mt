@@ -2,11 +2,12 @@ import {Heading,Button, Box, Select, Center, Square, Circle, Flex, HStack, VStac
 import React, { Component } from "react";
 import NoteInput from "./NoteInput";
 import Note from "./Note";
-import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { AddIcon, ArrowForwardIcon, CheckIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Footer } from '../Nav/Footer';
 import {CustomToast} from '../CustomToast'
 import { ToastContainer, toast } from 'react-toastify';
 import LanguageContext from "../../languages/LanguageContext";
+import Swal from 'sweetalert2'
 
 export default class Noteboard extends Component {
     static contextType = LanguageContext;
@@ -29,10 +30,12 @@ export default class Noteboard extends Component {
         this.fetchNoteData = this.fetchNoteData.bind(this)
         this.changeSorting = this.changeSorting.bind(this)
         this.ideaSubmitted = this.ideaSubmitted.bind(this)
+        this.Swal = this.Swal.bind(this)
     }
 
     componentDidMount(){
         this.fetchNoteData()
+        setInterval(this.fetchNoteData, 30000);
     }
 
     fetchNoteData(){
@@ -135,11 +138,33 @@ export default class Noteboard extends Component {
 
     ideaSubmitted(){
         if(this.state.ideaHasBeenSubmitted == false){
-            this.CustomToastElement.current.toastInfo('Thanks for the idea! You may add more ideas or continue to the next section!')
+            this.CustomToastElement.current.toastInfo('Thanks for the idea! You may add more ideas or continue!')
         }
         this.setState({ideaHasBeenSubmitted:true})
     }
 
+    Swal(){
+        Swal.fire({
+            title: 'Thank you for your participation!',
+            text:"Please consider also participating in my questionairre: googl.forms/skdfjaksd",
+            icon:'success',
+            width: 600,
+            padding: '3em',
+            background: '#fff',
+            backdrop: `
+              rgba(75,104,96,0.7)
+            `,
+            allowOutsideClick:false,
+            confirmButtonColor: '#b87160',
+            confirmButtonText: 'Complete'
+          }).then(result => {
+                if(result.isConfirmed){
+                    this.props.completePage()
+                }
+            }
+          )
+    }
+    
     render(){
         const language = this.context;
         return(
@@ -157,7 +182,7 @@ export default class Noteboard extends Component {
                             {!this.props.isCompleted ?
                             <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label={language.Noteboard.NextTooltip}>
                                 <span>
-                                <Button display={{md:"flex",base:"none"}} onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
+                                <Button mr={4} display={{md:"flex",base:"none"}} onClick={this.Swal} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<CheckIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
                                 </span>
                             </Tooltip> : <></>}
                         </HStack>
@@ -171,6 +196,11 @@ export default class Noteboard extends Component {
                                 <option value="recent">Recent</option>
                                 <option value="likes">Likes</option>
                             </Select>
+                            
+                            {/*<Tooltip label="Refresh board">
+                                <IconButton icon={<RepeatIcon/>} size='sm' variant="outline" onClick={() => this.fetchNoteData()}></IconButton>
+                            </Tooltip>*/}
+                            
                         </HStack>
 
                         {/*Displayed for mobile only */}
@@ -182,7 +212,7 @@ export default class Noteboard extends Component {
                             {!this.props.isCompleted ?
                             <Tooltip isDisabled={this.state.ideaHasBeenSubmitted} label={language.Noteboard.NextTooltip}>
                                 <span>
-                                <Button onClick={this.props.completePage} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
+                                <Button onClick={this.Swal} isDisabled={!this.state.ideaHasBeenSubmitted} rightIcon={<CheckIcon/>} colorScheme="auburn">{language.Noteboard.Next}</Button>
                                 </span>
                             </Tooltip> : <></>}
                         </HStack>

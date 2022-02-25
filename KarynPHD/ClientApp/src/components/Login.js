@@ -38,7 +38,8 @@ export class Login extends Component {
       locality:'',
       gender:'',
       submitted:false,
-      hideLogin:false
+      hideLogin:false,
+      consented:false
     };
 
     this.CustomToastElement = React.createRef()
@@ -51,6 +52,7 @@ export class Login extends Component {
     this.enableScrolling = this.enableScrolling.bind(this);
     this.disableScrolling = this.disableScrolling.bind(this);
     this.genderInput = this.genderInput.bind(this);
+    this.setCheckBox = this.setCheckBox.bind(this);
   }
 
   notify = () => toast.error('Sorry! You need to be over 18.', {
@@ -88,6 +90,10 @@ export class Login extends Component {
 
   genderInput(event){
     this.setState({gender:event.target.value})
+  }
+
+  setCheckBox(event){
+    this.setState({consented:event})
   }
 
   areAllInputsFilled(userDetails){
@@ -199,10 +205,14 @@ export class Login extends Component {
                     sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
                     onChange={this.onValid}
                   />
-                  
+
+                  <Checkbox p={2} isRequired colorScheme='auburn' onChange={(e) => this.setCheckBox(e.target.checked)}>
+                    <Flex>I consent to participate in this research <Text color='red'>&nbsp;*</Text></Flex>
+                  </Checkbox>
+
                   <Stack spacing={10}>                    
                     <Button
-                      isDisabled={!this.state.captchaVerified}
+                      isDisabled={(!this.state.captchaVerified || !this.state.consented)}
                       onClick={this.submit}
                       bg={'auburn.400'}
                       color={'white'}

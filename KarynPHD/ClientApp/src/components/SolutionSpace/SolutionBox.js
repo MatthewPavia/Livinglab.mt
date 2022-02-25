@@ -13,23 +13,28 @@ import {
     Image,
     Stack,
     Avatar,
+    Spacer,
     HStack,VStack,Button, Tooltip,Radio,RadioGroup,FormControl,FormLabel,SimpleGrid
   } from "@chakra-ui/react";
   import { ArrowBackIcon, ArrowForwardIcon, CheckIcon } from '@chakra-ui/icons'
 import { SolutionRating } from "./SolutionRating";
+import { AiOutlineExpand } from 'react-icons/ai';
 
 export class SolutionBox extends Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-          answers:[{'rating':'','opinion':'','encouraged':''}]
+          answers:[{'rating':'','opinion':'','encouraged':''}],
+          expandedImageUrl:""
         };
         
         this.handleTextareaChange = this.handleTextareaChange.bind(this)
         this.handleRadioChange = this.handleRadioChange.bind(this)
         this.handleRatingChange = this.handleRatingChange.bind(this)
         this.isFinalSolutionBox = this.isFinalSolutionBox.bind(this)
+        this.showImageOverlay = this.showImageOverlay.bind(this)
+        this.hideImageOverlay = this.hideImageOverlay.bind(this)
     }
 
     handleRatingChange(event){        
@@ -58,10 +63,23 @@ export class SolutionBox extends Component {
         return false
     }
 
+    showImageOverlay(url){
+        this.setState({expandedImageUrl:url}, () => document.getElementById("overlay").style.display = "block")
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    hideImageOverlay(){
+        document.getElementById("overlay").style.display = "none";
+    }
+
     render(){
         return(
             <>
-            
+
+            <div id="overlay" onClick={() => this.hideImageOverlay()}>
+                <div id="text"><Image src={this.state.expandedImageUrl}></Image></div>
+            </div>
+
             <Center py={6}>
                 <Tooltip label="Previous solution" isDisabled={this.props.currentSolution==1}>
                     <IconButton onClick={this.props.decrementCurrentSolution} size="lg" display={{md:"block",base:"none"}} isDisabled={this.props.currentSolution==1} colorScheme="eucalyptus" mr={4} icon={<ArrowBackIcon/>}/>
@@ -82,11 +100,11 @@ export class SolutionBox extends Component {
                         </Stack>
 
                         <SimpleGrid columns={{md:2,sm:1}}  p={6} spacing={16} justify="center"> 
-                            <VStack>
+                            <VStack style={{cursor:"pointer"}} onClick={() => this.showImageOverlay(this.props.img1Url)}>
                                 <Text fontSize="md" fontWeight={600}>{this.props.img1Title}</Text>
                                 <Image htmlHeight={250} htmlWidth={450} src={this.props.img1Url}/>
                             </VStack>      
-                            <VStack>
+                            <VStack style={{cursor:"pointer"}} onClick={() => this.showImageOverlay(this.props.img2Url)}>
                                 <Text fontSize="md" fontWeight={600}>{this.props.img2Title}</Text>
                                 <Image htmlHeight={250} htmlWidth={450} src={this.props.img2Url}/>
                             </VStack>                                    
@@ -101,7 +119,7 @@ export class SolutionBox extends Component {
                             </FormControl>
 
                             <FormControl isRequired p={2} pt={4}>
-                                <FormLabel fontSize={{md:"xl",base:"md"}}>Would such an intervention encourage you to walk more for short distance trips?</FormLabel>
+                                <FormLabel fontSize={{md:"xl",base:"md"}}>Would such an intervention in your locality encourage you to walk for short distance trips?*</FormLabel>
                                 <RadioGroup value={this.props.answers[this.props.currentSolution]['encouraged']} onChange={this.handleRadioChange}>
                                 <VStack align="left">
                                     <Radio colorScheme="auburn" size="md" value="Yes">Yes</Radio>
