@@ -34,7 +34,9 @@ namespace KarynPHD.Controllers
         {
             try
             {
-                var configurationSection = Configuration.GetSection("AzureTable");
+                string Env = Environment.GetEnvironmentVariable("livinglabenv") == "DEV" ? "DEV" : "PROD";
+
+                var configurationSection = Configuration.GetSection("AzureTable"+Env);
                 string uri = configurationSection.GetSection("Uri").Value;
                 string key = configurationSection.GetSection("Key").Value;
                 string account = configurationSection.GetSection("StorageAccountName").Value;
@@ -75,10 +77,11 @@ namespace KarynPHD.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] SolutionDTO userSolutions)
         {
-
             try
             {
-                var configurationSection = Configuration.GetSection("AzureTable");
+                string Env = Environment.GetEnvironmentVariable("livinglabenv") == "DEV" ? "DEV" : "PROD";
+
+                var configurationSection = Configuration.GetSection("AzureTable"+Env);
                 string uri = configurationSection.GetSection("Uri").Value;
                 string key = configurationSection.GetSection("Key").Value;
                 string account = configurationSection.GetSection("StorageAccountName").Value;

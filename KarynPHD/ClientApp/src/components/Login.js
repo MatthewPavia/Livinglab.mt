@@ -53,6 +53,7 @@ export class Login extends Component {
     this.disableScrolling = this.disableScrolling.bind(this);
     this.genderInput = this.genderInput.bind(this);
     this.setCheckBox = this.setCheckBox.bind(this);
+    this.getCaptchaKey = this.getCaptchaKey.bind(this);
   }
 
   notify = () => toast.error('Sorry! You need to be over 18.', {
@@ -152,6 +153,16 @@ export class Login extends Component {
       window.onscroll=function(){};
   }
 
+  getCaptchaKey(){
+    console.log(window.location.hostname)
+    if(window.location.hostname == "idealab.mt"){
+      return "6Le596YeAAAAADpY-ECSgp6d6Mz7RPJ3GwqyHELI"
+    }
+    else{
+      return "6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
+    }  
+  }
+
   render () {
 
     const language = this.context;
@@ -202,7 +213,7 @@ export class Login extends Component {
                       </Select>
                     </FormControl>
                   <ReCAPTCHA
-                    sitekey="6LehxTMcAAAAABmfTY5dWG4wGaHrtR1ChpV4gz1M"
+                    sitekey= {this.getCaptchaKey()}
                     onChange={this.onValid}
                   />
 
