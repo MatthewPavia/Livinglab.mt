@@ -155,7 +155,7 @@ export class Login extends Component {
 
   getCaptchaKey(){
     console.log(window.location.hostname)
-    if(window.location.hostname == "idealab.mt"){
+    if(window.location.hostname == "livinglab.mt"){
       return "6Le596YeAAAAADpY-ECSgp6d6Mz7RPJ3GwqyHELI"
     }
     else{
