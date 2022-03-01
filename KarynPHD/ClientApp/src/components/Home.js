@@ -62,7 +62,7 @@ export class Home extends Component {
                   bg: 'auburn.400',
                   zIndex: -1,
                 }}>
-                IdeaLab.mt
+                LivingLab.mt
               </Text>
               <br />{' '}         
             </Heading>
