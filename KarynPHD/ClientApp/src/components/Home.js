@@ -49,22 +49,9 @@ export class Home extends Component {
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={6} w={'full'} maxW={'lg'}>
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-              <Text
-                as={'span'}
-                position={'relative'}
-                _after={{
-                  content: "''",
-                  width: 'full',
-                  height: '20%',
-                  position: 'absolute',
-                  bottom: 1,
-                  left: 0,
-                  bg: 'auburn.400',
-                  zIndex: -1,
-                }}>
-                LivingLab.mt
-              </Text>
-              <br />{' '}         
+              
+              <Image htmlHeight={250} htmlWidth={350} src='https://livinglabprod.blob.core.windows.net/images/Logo.png'/>
+                   
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
               {language.Home.Description}
