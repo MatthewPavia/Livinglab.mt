@@ -17,7 +17,8 @@ import {
   useColorModeValue,
   Stack,
   Text,
-  ButtonGroup
+  ButtonGroup,
+  Image
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Stepper from './Stepper'
@@ -69,7 +70,7 @@ export default function NavMenu(props) {
           />
 
           <HStack spacing={8} alignItems={'center'}>
-            <Text color="eucalyptus.300" fontSize="xl" >MobilitAzzjoni</Text>
+            <Image ml={6} htmlHeight={75} htmlWidth={125} src='https://livinglabprod.blob.core.windows.net/images/Logo.png'/>
           </HStack>
 
             <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper currentCompletion={props.currentCompletion}></Stepper></Box>       
