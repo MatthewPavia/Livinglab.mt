@@ -45,7 +45,7 @@ export class Home extends Component {
 
       this.isAuth() ? <Redirect to="/main"></Redirect> : 
 
-      <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} bg='eucalyptus.100' position={'relative'} style={{zIndex:1}}>
+      <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} bg='#b5cac8' position={'relative'} style={{zIndex:1}}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={6} w={'full'} maxW={'lg'}>
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -56,18 +56,21 @@ export class Home extends Component {
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
               {language.Home.Description}
             </Text>
+            <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
+              Click START below to contribute your feedback on how to improve the pedestrian experience!
+            </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Button
                 onClick={this.handleLogin}
                 rounded={'full'}
                 bg={'auburn.400'}
                 color={'white'}
+                width='180px'
                 _hover={{
                   bg: 'auburn.500',
                 }}>
                 {language.Home.JoinButton}
               </Button>
-              <Button rounded={'full'}>{language.Home.InfoButton}</Button>
             </Stack>
           </Stack>
         </Flex>
@@ -76,7 +79,7 @@ export class Home extends Component {
             alt={'Login Image'}
             objectFit={'cover'}
             src={
-              'https://www.cityam.com/wp-content/uploads/2021/01/STR-VIEW-1-PROPOSED2-R13-1-960x697.jpg'
+              'https://livinglabprod.blob.core.windows.net/images/home image.jpg'
             }
           />
         </Flex>

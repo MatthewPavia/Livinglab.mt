@@ -126,12 +126,12 @@ export class SolutionSpace extends Component {
                 <HStack spacing={0} p={4} >
                     <Box>
                         <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Solution Space</Heading>
-                        <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>What do you think about these proposed solutions?</Text>
+                        <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>The following 4 ideas have been proposed by different stakeholders. What do you think of these solutions?</Text>
                     </Box>
                 </HStack>
                 <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} description={this.state.currentSolutionDetails.description} 
                     img1Title={this.state.currentSolutionDetails.img1Title} img1Url={this.state.currentSolutionDetails.img1Url} img2Title={this.state.currentSolutionDetails.img2Title} 
-                    img2Url={this.state.currentSolutionDetails.img2Url} currentSolution={this.state.currentSolution} totalSolutions={this.state.totalSolutions} 
+                    img2Url={this.state.currentSolutionDetails.img2Url} credits={this.state.currentSolutionDetails.credits} currentSolution={this.state.currentSolution} totalSolutions={this.state.totalSolutions} 
                     answers={this.state.answers} setAnswers={this.setAnswers} incrementCurrentSolution={this.incrementCurrentSolution} decrementCurrentSolution={this.decrementCurrentSolution}>                  
                 </SolutionBox>
             </Box>

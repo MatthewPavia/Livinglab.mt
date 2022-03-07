@@ -81,3 +81,13 @@ code {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+
+.imgcontainer {
+  position: relative;
+}
+
+.fa-download {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

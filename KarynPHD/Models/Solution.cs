@@ -22,5 +22,7 @@ namespace KarynPHD.Models
         public string Img2Title { get; set; }
         [JsonProperty(PropertyName = "Img2Url")]
         public string Img2Url { get; set; }
+        [JsonProperty(PropertyName = "Credits")]
+        public string Credits { get; set; }
     }
 }

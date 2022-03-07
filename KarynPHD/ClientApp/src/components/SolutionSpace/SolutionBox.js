@@ -16,7 +16,7 @@ import {
     Spacer,
     HStack,VStack,Button, Tooltip,Radio,RadioGroup,FormControl,FormLabel,SimpleGrid
   } from "@chakra-ui/react";
-  import { ArrowBackIcon, ArrowForwardIcon, CheckIcon } from '@chakra-ui/icons'
+  import { ArrowBackIcon, ArrowForwardIcon, CheckIcon, Search2Icon } from '@chakra-ui/icons'
 import { SolutionRating } from "./SolutionRating";
 import { AiOutlineExpand } from 'react-icons/ai';
 
@@ -102,11 +102,23 @@ export class SolutionBox extends Component {
                         <SimpleGrid columns={{md:2,sm:1}}  p={6} spacing={16} justify="center"> 
                             <VStack style={{cursor:"pointer"}} onClick={() => this.showImageOverlay(this.props.img1Url)}>
                                 <Text fontSize="md" fontWeight={600}>{this.props.img1Title}</Text>
-                                <Image htmlHeight={250} htmlWidth={450} src={this.props.img1Url}/>
+
+                                <div display={"block"} className="imgcontainer">
+                                    <Image display={"block"} htmlHeight={250} htmlWidth={450} src={this.props.img1Url}/>
+                                    <Search2Icon style={{"margin":8}} w={5} h={5} color='auburn.700' className="fa-download"/>
+                                </div>
+
+                                <Text fontSize="xs" fontWeight={400}>{this.props.credits}</Text>                              
                             </VStack>      
                             <VStack style={{cursor:"pointer"}} onClick={() => this.showImageOverlay(this.props.img2Url)}>
                                 <Text fontSize="md" fontWeight={600}>{this.props.img2Title}</Text>
-                                <Image htmlHeight={250} htmlWidth={450} src={this.props.img2Url}/>
+
+                                <div display={"block"} className="imgcontainer">
+                                    <Image display={"block"} htmlHeight={250} htmlWidth={450} src={this.props.img2Url}/>
+                                    <Search2Icon style={{"margin":8}} w={5} h={5} color='auburn.700' className="fa-download"/>
+                                </div>
+                                
+                                <Text fontSize="xs" fontWeight={400}>{this.props.credits}</Text>
                             </VStack>                                    
                         </SimpleGrid>           
 

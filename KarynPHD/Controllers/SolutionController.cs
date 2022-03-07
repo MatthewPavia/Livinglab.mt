@@ -58,7 +58,8 @@ namespace KarynPHD.Controllers
                         Img1Title = qEntity.GetString("Img1Title"),
                         Img1Url = qEntity.GetString("Img1Url"),
                         Img2Title = qEntity.GetString("Img2Title"),
-                        Img2Url = qEntity.GetString("Img2Url")
+                        Img2Url = qEntity.GetString("Img2Url"),
+                        Credits = qEntity.GetString("Credits")
                     };
 
                     solutions.Add(solution);

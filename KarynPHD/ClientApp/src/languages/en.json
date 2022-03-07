@@ -1,8 +1,8 @@
 {
     "Home":{
-        "JoinButton":"Join Living Lab",
+        "JoinButton":"START",
         "InfoButton":"How It Works",
-        "Description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis maximus ante."
+        "Description":"This online partipatory platform allows you to share your ideas and experiences within the Maltese urban walking environment."
     },
     "Login":{
         "Title":"Something about you",
@@ -28,7 +28,7 @@
     },
     "Noteboard":{
         "Title":"Idea Board",
-        "Description":"Think of a space or a street within your locality that you would like to see improved to encourage more people to walk rather than use their car. Add your ideas to the note board below and ‘heart’ ideas proposed by other users that you agree with.",
+        "Description":"What do you think would improve the urban walking environment and encourage more people to walk rather than use their car? Add your ideas to the note board below and ‘heart’ ideas proposed by other users that you agree with.",
         "Add":"Add Idea",
         "Next":"Finish",
         "NextTooltip":"Please add a note to proceed.",

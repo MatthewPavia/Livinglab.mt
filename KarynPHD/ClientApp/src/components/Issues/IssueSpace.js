@@ -63,8 +63,10 @@ export class IssueSpace extends Component {
             <Box>
                 <HStack direction="row" spacing={0} p={4} justify="space-between">
                     <Box>
-                        <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Current Issues in the Walking Environment</Heading>
-                        <Text fontSize={{lg:"xl",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>Think about the locality you live in. Which of the following issues do you experience? Click on each issue multiple times to choose a colour and indicate the following:</Text>
+                        <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Your Experience in the Walking Environment{/*Current Issues in the Walking Environment*/}</Heading>
+                        <Text fontSize={{lg:"xl",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>Think about your most recent walk/cycle within the urban environment. Which of the following issues did you experience?
+                            Click on each issue to choose a colour and indicate the following:{/*Think about the locality you live in. Which of the following issues do you experience? Click on each issue multiple times to choose a colour and indicate the following:*/}
+                        </Text>
                         <Stack pl={5} pt={4} direction={{md:"row",base:"column"}}>
                             <Badge fontSize={{md:"md",base:"xs"}} variant="solid" colorScheme="red">Red: Major Issue</Badge>
                             <Badge fontSize={{md:"md",base:"xs"}} variant="solid" colorScheme="orange">Orange: Somewhat of an issue</Badge>
