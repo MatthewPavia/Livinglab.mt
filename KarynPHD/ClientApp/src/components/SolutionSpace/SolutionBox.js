@@ -94,7 +94,7 @@ export class SolutionBox extends Component {
                                 {this.props.title}
                                 </Text>                                                                      
                             </HStack>
-                            <Text pl={{md:16,base:2}} color={'gray.700'} fontWeight={500} fontSize={{md:'xl',base:"md"}} letterSpacing={''}>
+                            <Text pl={{md:16,base:2}} color={'gray.700'} fontWeight={500} fontSize={{md:'lg',base:"md"}} letterSpacing={''}>
                                 {this.props.subtitle}
                                 </Text>  
                             <Text pl={{md:16,base:2}} color={'gray.700'} fontSize={{md:"lg",base:"md"}}>
