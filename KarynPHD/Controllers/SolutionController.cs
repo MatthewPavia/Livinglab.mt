@@ -54,6 +54,7 @@ namespace KarynPHD.Controllers
                     {
                         Number = qEntity.RowKey,
                         Title = qEntity.GetString("Title"),
+                        Subtitle = qEntity.GetString("SubTitle"),
                         Description = qEntity.GetString("Description"),
                         Img1Title = qEntity.GetString("Img1Title"),
                         Img1Url = qEntity.GetString("Img1Url"),

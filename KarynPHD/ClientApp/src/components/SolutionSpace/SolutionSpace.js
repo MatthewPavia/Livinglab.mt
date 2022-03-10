@@ -118,6 +118,8 @@ export class SolutionSpace extends Component {
     }
 
     render(){
+
+        console.log(this.state.solutions)
         return(
             <>
             <CustomToast ref={this.CustomToastElement} />
@@ -129,7 +131,7 @@ export class SolutionSpace extends Component {
                         <Text fontSize={{lg:"lg",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>The following 4 ideas have been proposed by different stakeholders. What do you think of these solutions?</Text>
                     </Box>
                 </HStack>
-                <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} description={this.state.currentSolutionDetails.description} 
+                <SolutionBox number={this.state.currentSolutionDetails.number} title={this.state.currentSolutionDetails.title} subtitle={this.state.currentSolutionDetails.subtitle} description={this.state.currentSolutionDetails.description} 
                     img1Title={this.state.currentSolutionDetails.img1Title} img1Url={this.state.currentSolutionDetails.img1Url} img2Title={this.state.currentSolutionDetails.img2Title} 
                     img2Url={this.state.currentSolutionDetails.img2Url} credits={this.state.currentSolutionDetails.credits} currentSolution={this.state.currentSolution} totalSolutions={this.state.totalSolutions} 
                     answers={this.state.answers} setAnswers={this.setAnswers} incrementCurrentSolution={this.incrementCurrentSolution} decrementCurrentSolution={this.decrementCurrentSolution}>                  

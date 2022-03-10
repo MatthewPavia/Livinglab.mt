@@ -92,8 +92,11 @@ export class SolutionBox extends Component {
                                 <Box className="numberCircle" fontSize={{md:"2xl",base:"md"}}>{this.props.number}</Box>
                                 <Text p={2} color={'auburn.500'} textTransform={''} fontWeight={700} fontSize={{md:'2xl',base:"lg"}} letterSpacing={''}>
                                 {this.props.title}
-                                </Text>                                                      
+                                </Text>                                                                      
                             </HStack>
+                            <Text pl={{md:16,base:2}} color={'gray.700'} fontWeight={500} fontSize={{md:'xl',base:"md"}} letterSpacing={''}>
+                                {this.props.subtitle}
+                                </Text>  
                             <Text pl={{md:16,base:2}} color={'gray.700'} fontSize={{md:"lg",base:"md"}}>
                                 {this.props.description}
                             </Text>
@@ -126,8 +129,8 @@ export class SolutionBox extends Component {
                         
                         <Box justify="left">
                             <FormControl isRequired p={2}>
-                                <FormLabel fontSize={{md:"xl",base:"md"}}>Your Opinion:</FormLabel>
-                                <Textarea isRequired value={this.props.answers[this.props.currentSolution]['opinion']} justify="center" onChange={this.handleTextareaChange} placeholder="Why did you make this decision? How can this solution be improved?" size="sm"/>
+                                <FormLabel fontSize={{md:"xl",base:"md"}}>What do you think about this idea?</FormLabel>
+                                <Textarea isRequired value={this.props.answers[this.props.currentSolution]['opinion']} justify="center" onChange={this.handleTextareaChange} placeholder="Why did you rate this way? How can this solution be improved?" size="sm"/>
                             </FormControl>
 
                             <FormControl isRequired p={2} pt={4}>

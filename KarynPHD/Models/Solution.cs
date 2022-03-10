@@ -12,6 +12,8 @@ namespace KarynPHD.Models
         public string Number { get; set; }
         [JsonProperty(PropertyName = "Title")]
         public string Title { get; set; }
+        [JsonProperty(PropertyName = "Subtitle")]
+        public string Subtitle { get; set; }
         [JsonProperty(PropertyName = "Description")]
         public string Description { get; set; }
         [JsonProperty(PropertyName = "Img1Title")]

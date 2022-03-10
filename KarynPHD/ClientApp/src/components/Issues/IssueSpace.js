@@ -91,16 +91,16 @@ export class IssueSpace extends Component {
 
             <Divider p={4}/>
 
-            <Stack direction="column" spacing={6} p={8} pr={{md:16,base:2}} pl={{md:16,base:2}}>
+            <Stack direction="column" spacing={6} p={8} pr={{md:16,base:2}} pl={{md:16,base:2}} justify="right">
                 <FormControl isRequired>
                     <FormLabel fontSize={{md:"xl",base:"md"}}>Do any of these factors discourage you from walking within your locality? If yes, which factors and why?</FormLabel>
                     <Textarea isRequired value={this.state.answers[12]} justify="center" id={12} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
                 </FormControl>
                 <FormControl isRequired>
-                    <FormLabel fontSize={{md:"xl",base:"md"}}>Do you experience any other problems related to transport in your locality?</FormLabel>
+                    <FormLabel fontSize={{md:"xl",base:"md"}}>Can you mention any other problems related to transport in your locality?</FormLabel>
                     <Textarea isRequired value={this.state.answers[13]} justify="center" id={13} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
                 </FormControl>
-
+           
                 <Tooltip display={{md:"none",base:"flex"}} isDisabled={this.allAnswered()} label="Please answer all questions to proceed">
                     <span>
                     <Button width="100%" display={{md:"none",base:"flex"}} onClick={this.submit} isDisabled={!this.allAnswered()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
@@ -108,6 +108,22 @@ export class IssueSpace extends Component {
                 </Tooltip>
             </Stack>
             
+            <Box>
+                    <HStack direction="row" spacing={0} p={4} justify="space-between">
+                        <Box>
+                            <Text fontSize={{lg:"xl",md:"md",sm:"xs"}} pl={5} pt={4} maxW={{lg:"100%", sm:"80%"}}>
+                            </Text>
+
+                        </Box>
+
+                        <Tooltip display={{md:"flex",base:"none"}} isDisabled={this.allAnswered()} label="Please answer all questions to proceed">
+                            <span>
+                            <Button ml={9} display={{md:"flex",base:"none"}} onClick={this.submit} isDisabled={!this.allAnswered()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                            </span>
+                        </Tooltip>
+                        
+                    </HStack>
+                </Box>
             
 
             </>
