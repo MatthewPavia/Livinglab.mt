@@ -20,9 +20,9 @@ export class SolutionSpace extends Component {
         this.state = { 
           solutions:[],
           currentSolutionDetails:{},
-          answers:[{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'aa','opinion':'aa','encouraged':'aa'}],
+          answers:[{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''},{'rating':'','opinion':'','encouraged':''}],
           currentSolution:1,
-          totalSolutions:2
+          totalSolutions:1
         };
         
         this.CustomToastElement = React.createRef()
@@ -45,7 +45,7 @@ export class SolutionSpace extends Component {
                 }
             }
         })
-        .then(data => this.setState({solutions:data},() => this.getCurrentSolutionDetails()))
+        .then(data => this.setState({solutions:data, totalSolutions:data.length},() => this.getCurrentSolutionDetails()))
     }
 
     getCurrentSolutionDetails(){
@@ -63,9 +63,11 @@ export class SolutionSpace extends Component {
     allAnswered(){
         let answers = this.state.answers.slice()
 
-        if(answers.length == 4){
+        if(answers.length == 5){
             answers.shift()
         }
+
+        console.log(answers)
 
         let validation = answers.every(x => x.rating && x.opinion && x.encouraged)
 
