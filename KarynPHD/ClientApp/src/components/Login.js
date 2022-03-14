@@ -154,7 +154,8 @@ export class Login extends Component {
   }
 
   getCaptchaKey(){
-    if(window.location.hostname == "livinglab.mt"){
+    console.log(window.location.hostname)
+    if(window.location.hostname == "livinglab.mt" || window.location.hostname == "www.livinglab.mt"){
       return "6Le596YeAAAAADpY-ECSgp6d6Mz7RPJ3GwqyHELI"
     }
     else{
