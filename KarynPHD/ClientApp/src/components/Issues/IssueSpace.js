@@ -9,7 +9,7 @@ export class IssueSpace extends Component {
         super(props);
         this.state = { 
           issues:[
-              "Poor pavement quality","Lack of street crossings (e.g. zebra crossings)","High traffic speed","Lack of trees/green spaces","Unattractive building development and design","Air pollution","Noise pollution","Litter/poor street cleanliness","Safety from crime","Poor road and infrastucture design","Traffic congestion","Lack of street furniture (e.g. benches)"            
+              "Cleanliness of street and pavement","Visual look of architecture and open spaces","Trees, green spaces","Safety from crime","Street furniture","Road infrastructure","Land use","Safety from traffic","Level of air pollution","Level of noise pollution"            
           ],
           answers:[]
         };         
@@ -23,7 +23,7 @@ export class IssueSpace extends Component {
         const cookies = new Cookies();
 
         let questions = this.state.issues
-        questions.push("Do any of these factors discourage you from walking within your locality? If yes, which factors and why?","Do you experience any other problems related to transport in your locality?")
+        questions.push("Do any of these factors discourage you from walking within your locality? If yes, which factors and why?")
 
         fetch('issues',{
             method:'POST',
@@ -51,7 +51,7 @@ export class IssueSpace extends Component {
     }
 
     allAnswered(){
-        if(this.state.answers.length == 14 && !(this.state.answers.includes(undefined) || this.state.answers.includes("")) ){
+        if(this.state.answers.length == 11 && !(this.state.answers.includes(undefined) || this.state.answers.includes("")) ){
             return true
         }
         return false
@@ -83,7 +83,7 @@ export class IssueSpace extends Component {
                 </HStack>
             </Box>
 
-            <SimpleGrid columns={{lg:3,md:2,base:1}} spacing={5} p={4}>
+            <SimpleGrid columns={{lg:2,md:2,base:1}} spacing={5} p={4}>
                 {this.state.issues.map((x,i) => 
                 <IssueBox key={i} num={i} text={x} setAnswer={this.setAnswer}></IssueBox>
                 )}  
@@ -94,11 +94,7 @@ export class IssueSpace extends Component {
             <Stack direction="column" spacing={6} p={8} pr={{md:16,base:2}} pl={{md:16,base:2}} justify="right">
                 <FormControl isRequired>
                     <FormLabel fontSize={{md:"xl",base:"md"}}>Do any of these factors discourage you from walking within your locality? If yes, which factors and why?</FormLabel>
-                    <Textarea isRequired value={this.state.answers[12]} justify="center" id={12} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
-                </FormControl>
-                <FormControl isRequired>
-                    <FormLabel fontSize={{md:"xl",base:"md"}}>Can you mention any other problems related to transport in your locality?</FormLabel>
-                    <Textarea isRequired value={this.state.answers[13]} justify="center" id={13} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
+                    <Textarea isRequired value={this.state.answers[10]} justify="center" id={10} onChange={this.handleTextAreaChange} placeholder="Type here" size="sm"/>
                 </FormControl>
            
                 <Tooltip display={{md:"none",base:"flex"}} isDisabled={this.allAnswered()} label="Please answer all questions to proceed">
@@ -123,7 +119,7 @@ export class IssueSpace extends Component {
                         </Tooltip>
                         
                     </HStack>
-                </Box>
+            </Box>
             
 
             </>

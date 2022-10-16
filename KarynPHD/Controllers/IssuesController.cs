@@ -36,7 +36,8 @@ namespace KarynPHD.Controllers
                 string key = configurationSection.GetSection("Key").Value;
                 string account = configurationSection.GetSection("StorageAccountName").Value;
 
-                var tableClient = new TableClient(new Uri(uri), "Issues", new TableSharedKeyCredential(account, key));
+                var tableClient = new TableClient(new Uri(uri), "SecondPage", new TableSharedKeyCredential(account, key));
+                tableClient.CreateIfNotExists();
 
                 int i = 0;
 

@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import { IssueSpace } from './Issues/IssueSpace';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { FirstPage } from './First Page/FirstPage';
 
 export class Main extends Component {
     constructor(props) {
@@ -53,10 +54,10 @@ export class Main extends Component {
 
     pageToDisplay(){
         if(this.state.currentCompletion == 0){
-            return(<IssueSpace completePage={this.completePage}></IssueSpace>)
+            return(<FirstPage completePage={this.completePage}></FirstPage>)
         }
         else if(this.state.currentCompletion == 1){
-            return(<SolutionSpace completePage={this.completePage}></SolutionSpace>)
+            return(<IssueSpace completePage={this.completePage}></IssueSpace>)
         }
         else if(this.state.currentCompletion == 2){        
             return(<Noteboard isCompleted={false} completePage={this.completePage}></Noteboard>)

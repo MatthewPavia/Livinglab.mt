@@ -73,7 +73,6 @@ export default function NavMenu(props) {
             <Image ml={6} htmlHeight={75} htmlWidth={125} src='https://livinglabprod.blob.core.windows.net/images/Logo.png'/>
           </HStack>
 
-            <Box w="30%" display={{ base: 'none', md: 'flex' }}><Stepper currentCompletion={props.currentCompletion}></Stepper></Box>       
             <Flex alignItems={'center'} display={{ base: 'none', md: 'flex' }}>
 
               {/*
@@ -90,9 +89,7 @@ export default function NavMenu(props) {
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={1}>
-              <Stepper currentCompletion={props.currentCompletion}></Stepper>
-            </Stack>
+            
             {/*<ButtonGroup size="md" colorScheme="eucalyptus" isAttached>
               <Button onClick={() => props.onLanguageChange("en")} variant={props.isEnglish() ? "solid" : "outline"} mr="-px">En</Button>
               <Button onClick={() => props.onLanguageChange("mt")} variant={!props.isEnglish() ? "solid" : "outline"} mr="-px">Mt</Button>

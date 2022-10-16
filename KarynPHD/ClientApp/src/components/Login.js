@@ -36,6 +36,7 @@ export class Login extends Component {
       displayName:'',
       age: 0,
       locality:'',
+      route:'',
       gender:'',
       submitted:false,
       hideLogin:false,
@@ -47,6 +48,7 @@ export class Login extends Component {
     this.onValid = this.onValid.bind(this);
     this.ageInput = this.ageInput.bind(this);
     this.localityInput = this.localityInput.bind(this);
+    this.routeInput = this.routeInput.bind(this);
     this.submit = this.submit.bind(this);
     this.areAllInputsFilled = this.areAllInputsFilled.bind(this);
     this.enableScrolling = this.enableScrolling.bind(this);
@@ -89,6 +91,10 @@ export class Login extends Component {
     this.setState({locality:event.target.value})
   }
 
+  routeInput(event){
+    this.setState({route:event.target.value})
+  }
+
   genderInput(event){
     this.setState({gender:event.target.value})
   }
@@ -123,7 +129,8 @@ export class Login extends Component {
       "username" : username,
       "age":this.state.age,
       "gender":this.state.gender,
-      "locality":this.state.locality
+      "locality":this.state.locality,
+      "route":this.state.route
     }
 
     if(this.areAllInputsFilled(userDetails) && this.state.captchaVerified){
@@ -211,7 +218,14 @@ export class Login extends Component {
                         (locality => <option key={locality}>{locality}</option>)
                         }                         
                       </Select>
-                    </FormControl>
+                  </FormControl>
+                  <FormControl id="route" isRequired isInvalid={this.state.route == '' && this.state.submitted == true}>
+                      <FormLabel>Which route did you just go on?</FormLabel>
+                      <Select placeholder="Select route" onBlur={this.routeInput}>
+                        <option key={'Msida'}>Msida</option>
+                        <option key={'Gzira'}>Gzira</option>                        
+                      </Select>
+                  </FormControl>
                   <ReCAPTCHA
                     sitekey= {this.getCaptchaKey()}
                     onChange={this.onValid}

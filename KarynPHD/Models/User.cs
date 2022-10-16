@@ -22,5 +22,7 @@ namespace KarynPHD.Models
 
         [JsonProperty(PropertyName = "locality")]
         public string locality { get; set; }
+        [JsonProperty(PropertyName = "route")]
+        public string route { get; set; }
     }
 }
