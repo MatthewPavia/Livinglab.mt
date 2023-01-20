@@ -10,6 +10,8 @@ import { IssueSpace } from './Issues/IssueSpace';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { FirstPage } from './First Page/FirstPage';
+import { ThirdPage } from './Third Page/ThirdPage';
+import { FourthPage } from './Fourth Page/FourthPage';
 
 export class Main extends Component {
     constructor(props) {
@@ -60,18 +62,22 @@ export class Main extends Component {
             return(<IssueSpace completePage={this.completePage}></IssueSpace>)
         }
         else if(this.state.currentCompletion == 2){        
-            return(<Noteboard isCompleted={false} completePage={this.completePage}></Noteboard>)
+            return(<ThirdPage completePage={this.completePage}></ThirdPage>)
         }
-        else if(this.state.currentCompletion >= 3){
+        else if(this.state.currentCompletion == 3){        
+            return(<FourthPage completePage={this.completePage}></FourthPage>)
+        }
+        else if(this.state.currentCompletion >= 4){
             return(<Noteboard isCompleted={true} completePage={this.completePage}></Noteboard>)
         }
     }
 
     render(){
+        
         return(
             <>  
                 <Box width='100%' height='100%' position='relative'>
-                    <NavMenu onLanguageChange={this.props.onLanguageChange} isEnglish={this.props.isEnglish} currentCompletion={this.state.currentCompletion} isCompleted={this.state.currentCompletion >= 3}></NavMenu>    
+                    <NavMenu onLanguageChange={this.props.onLanguageChange} isEnglish={this.props.isEnglish} currentCompletion={this.state.currentCompletion} isCompleted={this.state.currentCompletion >= 4}></NavMenu>    
                     {!this.props.isAuth ? 
                     <Box position='absolute' width='100%' height='100%' zIndex='10'>
                         <Login></Login>

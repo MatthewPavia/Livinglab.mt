@@ -9,7 +9,7 @@ export class IssueSpace extends Component {
         super(props);
         this.state = { 
           issues:[
-              "Cleanliness of street and pavement","Visual look of architecture and open spaces","Trees, green spaces","Safety from crime","Street furniture","Road infrastructure","Land use","Safety from traffic","Level of air pollution","Level of noise pollution"            
+              "Cleanliness of street and pavement","Visual look of architecture and open spaces","Trees and green spaces","Safety from crime","Street furniture (benches, bins)","Road infrastructure (presence and quality of pavements, cycle lanes, street crossings)","Land use (variety of shops, restaurants, schools, services...)","Safety from traffic (speed, accidents)","Level of air pollution","Level of noise pollution"            
           ],
           answers:[]
         };         
@@ -17,6 +17,10 @@ export class IssueSpace extends Component {
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this)
         this.allAnswered = this.allAnswered.bind(this)
         this.submit = this.submit.bind(this)
+    }
+
+    componentDidMount(){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     submit(){

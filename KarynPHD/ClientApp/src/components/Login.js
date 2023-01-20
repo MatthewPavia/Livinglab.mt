@@ -56,6 +56,7 @@ export class Login extends Component {
     this.genderInput = this.genderInput.bind(this);
     this.setCheckBox = this.setCheckBox.bind(this);
     this.getCaptchaKey = this.getCaptchaKey.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
 
   notify = () => toast.error('Sorry! You need to be over 18.', {
@@ -69,10 +70,6 @@ export class Login extends Component {
                                 });
 
   dismissAll = () =>  toast.dismiss();
-
-  componentDidMount(){
-    this.disableScrolling()
-  }
 
   onValid(){
     this.setState({captchaVerified:true})
@@ -143,6 +140,8 @@ export class Login extends Component {
       }).then(() => this.setUserCookies(username))
       .then(() => this.setState({hideLogin:true}))
       .then(this.enableScrolling)
+      .then(this.scrollToTop)
+      .then(() => window.location.reload())
       .catch(error => console.log(error))
     }
     else{
@@ -160,6 +159,10 @@ export class Login extends Component {
       window.onscroll=function(){};
   }
 
+  scrollToTop(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
   getCaptchaKey(){
     console.log(window.location.hostname)
     if(window.location.hostname == "livinglab.mt" || window.location.hostname == "www.livinglab.mt"){
@@ -171,7 +174,6 @@ export class Login extends Component {
   }
 
   render () {
-
     const language = this.context;
 
     return (  
@@ -186,14 +188,15 @@ export class Login extends Component {
             bg='rgba(196, 196, 196, 0.6)'         
             >
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-              <Stack align={'center'}>
-                <Heading fontSize={'4xl'}>{language.Login.Title}</Heading>                
-              </Stack>
+              
               <Box
                 rounded={'lg'}
                 bg={'white'}
                 boxShadow={'lg'}
                 p={8}>
+                <Stack align={'center'} pb={6} pt={2}>
+                  <Heading fontSize={{md:"4xl", base:"2xl"}}>{language.Login.Title}</Heading>                
+                </Stack>
                 <Stack spacing={4}>
 
                   <HStack spacing={2}>
@@ -222,8 +225,8 @@ export class Login extends Component {
                   <FormControl id="route" isRequired isInvalid={this.state.route == '' && this.state.submitted == true}>
                       <FormLabel>Which route did you just go on?</FormLabel>
                       <Select placeholder="Select route" onBlur={this.routeInput}>
-                        <option key={'Msida'}>Msida</option>
-                        <option key={'Gzira'}>Gzira</option>                        
+                        <option key={'Swatar'}>Swatar</option>
+                        <option key={'Gzira'}>Gżira</option>                        
                       </Select>
                   </FormControl>
                   <ReCAPTCHA

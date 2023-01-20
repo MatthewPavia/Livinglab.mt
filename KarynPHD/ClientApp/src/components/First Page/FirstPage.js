@@ -12,7 +12,12 @@ export class FirstPage extends Component {
         };     
 
         this.submit = this.submit.bind(this)
-        this.setValue = this.setValue.bind(this)       
+        this.setValue = this.setValue.bind(this) 
+        this.disableSubmit = this.disableSubmit.bind(this)       
+    }
+
+    componentDidMount(){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     submit(){
@@ -22,7 +27,7 @@ export class FirstPage extends Component {
 
         fetch('pages/firstpage',{
             method:'POST',
-            body:JSON.stringify({"FirstPageValue":this.state.rangeValue,"PostedBy":cookies.get('username')}),
+            body:JSON.stringify({"PageValue":this.state.rangeValue,"PostedBy":cookies.get('username')}),
             headers:{'Content-Type': 'application/json'} 
             })
         .then(res => {
@@ -36,35 +41,42 @@ export class FirstPage extends Component {
     }
 
     setValue(event){
-
+        console.log(event)
         this.setState({rangeValue:event})
+    }
+
+    disableSubmit(){
+        if(this.state.rangeValue==0){
+            return true
+        }
+        return false
     }
 
     render(){
 
         return(
             <>
-            <Box>
+            <Box position={'relative'}>
 
                 <HStack direction="row" spacing={0} p={4} justify="space-between">
-                    <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>How much physical effort did you have to make during the walk you just did, based on the following scale?</Heading>
+                    <Heading fontSize={{md:"3xl", base:"2xl"}} pl={5}>Using the following scale, how physically exerting did you find the walk you just did?</Heading>
                     <Tooltip display={{md:"flex",base:"none"}} isDisabled={this.state.rangeValue!=0} label="Please answer all questions to proceed">
                         <span>
-                        <Button ml={9} display={{md:"flex",base:"none"}} onClick={this.submit} isDisabled={this.state.rangeValue==0} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                        <Button ml={9} display={{md:"flex",base:"none"}} onClick={this.submit} isDisabled={this.disableSubmit()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
                         </span>
                     </Tooltip>
                 </HStack>
 
-                <Box p={12} pl={16} pr={16}>
+                <Box p={12} pl={16} pr={16} align={'center'} justify={'center'}>
                     <RadioGroup colorScheme='auburn' onChange={this.setValue}>
                         <Stack>
-                            <Radio value='1'>Very easy</Radio>
-                            <Radio value='2'>Easy </Radio>
-                            <Radio value='3'>Moderate</Radio>
-                            <Radio value='4'>Somewhat hard</Radio>
-                            <Radio value='5'>Hard</Radio>
-                            <Radio value='6'>Very Hard</Radio>
-                            <Radio value='7'>Maximum effort</Radio>
+                            <Radio value='1'>1. Very easy</Radio>
+                            <Radio value='2'>2. Easy </Radio>
+                            <Radio value='3'>3. Moderate</Radio>
+                            <Radio value='4'>4. Somewhat hard</Radio>
+                            <Radio value='5'>5. Hard</Radio>
+                            <Radio value='6'>6. Very Hard</Radio>
+                            <Radio value='7'>7. Maximum effort</Radio>
                         </Stack>
                     </RadioGroup>
                 </Box>
@@ -80,7 +92,7 @@ export class FirstPage extends Component {
 
                         <Tooltip display={{md:"none",base:"flex"}} isDisabled={this.state.rangeValue!=0} label="Please answer all questions to proceed">
                             <span>
-                            <Button ml={9} display={{md:"none",base:"flex"}} onClick={this.submit} isDisabled={this.state.rangeValue==0} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
+                            <Button ml={9} display={{md:"none",base:"flex"}} onClick={this.submit} isDisabled={this.disableSubmit()} rightIcon={<ArrowForwardIcon/>} colorScheme="auburn">Next</Button>
                             </span>
                         </Tooltip>
                         

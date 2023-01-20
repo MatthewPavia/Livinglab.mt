@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KarynPHD.Models
 {
-    public class FirstPage
+    public class GenericPage
     {
         [JsonProperty(PropertyName = "FirstPageValue")]
-        public string FirstPageValue { get; set; }
+        public string PageValue { get; set; }
         [JsonProperty(PropertyName = "PostedBy")]
         public string PostedBy { get; set; }
     }

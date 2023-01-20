@@ -96,7 +96,7 @@ export default function NavMenu(props) {
             </ButtonGroup>*/}
 
             {props.isCompleted ?
-                <Button onClick={() => leaveLab()} size="sm" colorScheme="eucalyptus" variant="outline">Leave Lab</Button>
+                <Button onClick={() => clearCookies()} size="sm" colorScheme="eucalyptus" variant="outline">Leave Lab</Button>
               : <></>}
 
           </Box>
